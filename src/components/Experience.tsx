@@ -13,7 +13,7 @@ export function Experience() {
   return (
     <section id="experience" className="relative mx-auto max-w-6xl scroll-mt-24 px-5 py-16 md:py-24">
       <BlockHeader
-        block={3}
+        block={4}
         kicker="// experience.log"
         title={
           <>
