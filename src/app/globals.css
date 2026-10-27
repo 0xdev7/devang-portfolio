@@ -1,0 +1,83 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-ink: #05070d;
+  --color-panel: #0b1020;
+  --color-panel-2: #10172b;
+  --color-line: #1d2742;
+  --color-muted: #8a94b3;
+  --color-text: #e6ebff;
+  --color-cyan: #22d3ee;
+  --color-violet: #8b5cf6;
+  --color-emerald: #34d399;
+  --color-amber: #fbbf24;
+  --color-rose: #fb7185;
+  --font-sans: var(--font-display);
+  --font-mono: var(--font-code);
+}
+
+html {
+  background: var(--color-ink);
+  overflow-x: clip;
+  -webkit-tap-highlight-color: transparent;
+  color-scheme: dark;
+}
+
+body {
+  background: var(--color-ink);
+  color: var(--color-text);
+  font-family: var(--font-display), system-ui, sans-serif;
+  overflow-x: clip;
+}
+
+::selection {
+  background: rgb(34 211 238 / 0.35);
+  color: #fff;
+}
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.text-gradient {
+  background: linear-gradient(100deg, #22d3ee 0%, #8b5cf6 55%, #f472b6 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.glass {
+  background: linear-gradient(180deg, rgb(16 23 43 / 0.72), rgb(11 16 32 / 0.6));
+  border: 1px solid rgb(120 140 200 / 0.14);
+  backdrop-filter: blur(14px);
+}
+
+.grid-bg {
+  background-image:
+    linear-gradient(rgb(120 140 200 / 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(120 140 200 / 0.05) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.animate-marquee {
+  animation: marquee 40s linear infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+.caret {
+  animation: blink 1s steps(1) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee { animation: none; }
+}
