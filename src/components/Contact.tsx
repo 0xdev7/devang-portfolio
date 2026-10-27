@@ -58,7 +58,7 @@ export function Contact() {
               key={href}
               href={href}
               target={href.startsWith("http") ? "_blank" : undefined}
-              rel="noreferrer"
+              rel="noopener noreferrer"
               whileHover={{ x: 6 }}
               className="flex items-center gap-4 rounded-xl p-4 glass transition hover:border-cyan/50"
             >
@@ -95,6 +95,7 @@ export function Contact() {
                 onChange={(e) => setMsg(e.target.value)}
                 rows={4}
                 placeholder="Tell me about the role…"
+                maxLength={1500}
                 className="mt-1 w-full resize-none bg-transparent text-text outline-none placeholder:text-muted/50"
               />
             </div>

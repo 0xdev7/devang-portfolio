@@ -1,0 +1,4 @@
+Contact: mailto:parekhdevang14@gmail.com
+Expires: 2027-10-27T00:00:00.000Z
+Preferred-Languages: en
+Canonical: https://devang-parekh.vercel.app/.well-known/security.txt

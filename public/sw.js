@@ -1,6 +1,6 @@
 // Offline support: pages network-first (fresh content when online),
 // static assets cache-first (hashed by Next, safe to keep).
-const CACHE = "devang-v3";
+const CACHE = "devang-v4";
 const PRECACHE = ["/", "/images/devang.jpg", "/icons/icon-192.png", "/icons/icon-512.png"];
 
 self.addEventListener("install", (e) => {
@@ -23,8 +23,11 @@ self.addEventListener("fetch", (e) => {
     e.respondWith(
       fetch(req)
         .then((res) => {
-          const copy = res.clone();
-          caches.open(CACHE).then((c) => c.put("/", copy));
+          // Only a good, same-origin home page may become the offline copy.
+          if (res.ok && res.type === "basic" && new URL(req.url).pathname === "/") {
+            const copy = res.clone();
+            caches.open(CACHE).then((c) => c.put("/", copy));
+          }
           return res;
         })
         .catch(() => caches.match("/")),
@@ -37,7 +40,7 @@ self.addEventListener("fetch", (e) => {
       (hit) =>
         hit ||
         fetch(req).then((res) => {
-          if (res.ok) {
+          if (res.ok && res.type === "basic") {
             const copy = res.clone();
             caches.open(CACHE).then((c) => c.put(req, copy));
           }

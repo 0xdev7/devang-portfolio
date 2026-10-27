@@ -58,3 +58,13 @@ public/sw.js                         service worker (offline + install)
 ## Deploy
 
 No environment variables needed. Vercel is the quickest: import the repo and deploy. On Azure, run it as a Web App (Node 20, start command `pnpm start`) or build a Docker image and deploy it to Container Apps.
+
+## Security
+
+- Security headers on every route (`next.config.ts`): Content-Security-Policy, HSTS (preload), X-Frame-Options DENY + `frame-ancestors 'none'`, nosniff, strict Referrer-Policy, a locked-down Permissions-Policy, COOP / CORP same-origin, `X-Powered-By` removed
+- `pnpm audit` clean — the vulnerable `postcss` that Next pulls in is overridden to a patched version in `pnpm-workspace.yaml`
+- Service worker caches only good, same-origin responses and is always served uncached, so fixes reach visitors at once
+- External links use `rel="noopener noreferrer"`; no secrets, env vars or third-party scripts in the bundle
+- Responsible disclosure: `/.well-known/security.txt`
+
+CSP keeps `'unsafe-inline'` for scripts and styles because Next's App Router injects inline RSC scripts and the CSS is inlined; nonces would force every page to render dynamically.
