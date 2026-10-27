@@ -1,0 +1,110 @@
+"use client";
+
+import { motion } from "framer-motion";
+import { Bot, FileText, GitBranch, ShieldCheck } from "lucide-react";
+import { useEffect, useState } from "react";
+import { aiWorkflow } from "@/data/profile";
+import { BlockHeader } from "./BlockHeader";
+
+const icons = [FileText, GitBranch, Bot, ShieldCheck];
+
+const terminal = [
+  { c: "text-muted", t: "$ claude --resume hedge-mapping-3-venue" },
+  { c: "text-violet", t: "● explorer   mapping 11 crates, 18 migrations…" },
+  { c: "text-cyan", t: "● architect  spec → docs/specs/x-perp-route.md" },
+  { c: "text-amber", t: "● implement  worktree feat/exposure-caps (3 agents)" },
+  { c: "text-emerald", t: "✓ tests      1,712 passed · 0 failed" },
+  { c: "text-emerald", t: "✓ review     human-approved · staged rollout" },
+];
+
+function Terminal() {
+  const [n, setN] = useState(0);
+  useEffect(() => {
+    const id = setInterval(() => setN((x) => (x >= terminal.length + 3 ? 0 : x + 1)), 900);
+    return () => clearInterval(id);
+  }, []);
+  return (
+    <div className="overflow-hidden rounded-2xl border border-line bg-[#070b16] shadow-2xl">
+      <div className="flex items-center gap-1.5 border-b border-line px-4 py-2.5">
+        <span className="h-2.5 w-2.5 rounded-full bg-rose/70" />
+        <span className="h-2.5 w-2.5 rounded-full bg-amber/70" />
+        <span className="h-2.5 w-2.5 rounded-full bg-emerald/70" />
+        <span className="ml-3 font-mono text-[11px] text-muted">claude-code · orbt-hedge</span>
+      </div>
+      <div className="min-h-[200px] space-y-1.5 p-5 font-mono text-[12.5px]">
+        {terminal.slice(0, n).map((l, i) => (
+          <motion.div key={i} initial={{ opacity: 0, x: -6 }} animate={{ opacity: 1, x: 0 }} className={l.c}>
+            {l.t}
+          </motion.div>
+        ))}
+        {n <= terminal.length && <span className="caret text-cyan">▍</span>}
+      </div>
+    </div>
+  );
+}
+
+export function AIWorkflow() {
+  return (
+    <section id="ai" className="relative mx-auto max-w-6xl scroll-mt-24 px-5 py-16 md:py-24">
+      <BlockHeader
+        block={7}
+        kicker="// agents.config"
+        title={
+          <>
+            AI-augmented, <span className="text-gradient">human-verified.</span>
+          </>
+        }
+      />
+
+      <div className="grid items-start gap-10 lg:grid-cols-2">
+        <div>
+          <p className="text-lg leading-relaxed text-text/85">{aiWorkflow.intro}</p>
+          <div className="mt-8 grid grid-cols-2 gap-3">
+            {aiWorkflow.numbers.map((n, i) => (
+              <motion.div
+                key={n.label}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.08 }}
+                className="rounded-xl p-4 glass"
+              >
+                <div className="text-2xl font-bold text-gradient">{n.value}</div>
+                <div className="text-xs text-muted">{n.label}</div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+        <Terminal />
+      </div>
+
+      <div className="relative mt-14 grid gap-4 md:grid-cols-4">
+        <div className="absolute left-0 right-0 top-9 hidden h-px bg-gradient-to-r from-cyan via-violet to-emerald md:block" />
+        {aiWorkflow.steps.map((s, i) => {
+          const Icon = icons[i];
+          return (
+            <motion.div
+              key={s.title}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.15 }}
+              className="relative"
+            >
+              <motion.div
+                animate={{ boxShadow: ["0 0 0 rgba(34,211,238,0)", "0 0 24px rgba(34,211,238,0.6)", "0 0 0 rgba(34,211,238,0)"] }}
+                transition={{ duration: 2.4, delay: i * 0.6, repeat: Infinity }}
+                className="relative z-10 mb-4 grid h-[72px] w-[72px] place-items-center rounded-2xl border border-cyan/40 bg-ink"
+              >
+                <Icon className="h-7 w-7 text-cyan" />
+              </motion.div>
+              <div className="font-mono text-[11px] text-violet">step 0{i + 1}</div>
+              <div className="text-lg font-bold">{s.title}</div>
+              <p className="mt-1 text-sm text-muted">{s.text}</p>
+            </motion.div>
+          );
+        })}
+      </div>
+    </section>
+  );
+}
