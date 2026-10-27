@@ -3,7 +3,7 @@
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { ArrowDown, CheckCircle2, CreditCard, MapPin, Rocket, ScanFace } from "lucide-react";
+import { ArrowDown, Atom, Database, MapPin, Server, Users } from "lucide-react";
 import { useEffect, useState } from "react";
 import { profile } from "@/data/profile";
 
@@ -64,11 +64,12 @@ function SplitName({ text, delay, className }: { text: string; delay: number; cl
   );
 }
 
+// Major skills only — no made-up transactions.
 const badges = [
-  { icon: ScanFace, text: "KYC verified · liveness ✓", cls: "-left-12 top-8 text-emerald", delay: 2.2 },
-  { icon: CreditCard, text: "Payment captured · ₹2,499", cls: "-right-10 top-1/3 text-cyan", delay: 2.5 },
-  { icon: CheckCircle2, text: "Tx confirmed · 12/12", cls: "-left-8 bottom-24 text-violet", delay: 2.8 },
-  { icon: Rocket, text: "Deployed · Azure", cls: "-right-6 bottom-8 text-amber", delay: 3.1 },
+  { icon: Users, text: "Team Lead · 6 engineers", cls: "-left-12 top-8 text-emerald", delay: 2.2 },
+  { icon: Atom, text: "React · Next.js", cls: "-right-10 top-1/3 text-cyan", delay: 2.5 },
+  { icon: Server, text: "Node.js · PHP", cls: "-left-8 bottom-24 text-violet", delay: 2.8 },
+  { icon: Database, text: "MSSQL · MySQL · MongoDB · PostgreSQL", cls: "-bottom-7 -right-10 text-amber", delay: 3.1 },
 ];
 
 function useWebGL() {

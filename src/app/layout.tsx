@@ -16,7 +16,15 @@ export const metadata: Metadata = {
   },
   applicationName: "Devang Parekh",
   appleWebApp: { capable: true, title: "Devang", statusBarStyle: "black-translucent" },
-  icons: { apple: "/icons/apple-touch-icon.png" },
+  // Listing icons here overrides Next's file-based icons, so every size is named explicitly.
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "48x48" },
+      { url: "/icon.svg", type: "image/svg+xml" },
+      { url: "/icons/icon-192.png", sizes: "192x192", type: "image/png" },
+    ],
+    apple: [{ url: "/icons/apple-touch-icon.png", sizes: "180x180" }],
+  },
   formatDetection: { telephone: false },
 };
 

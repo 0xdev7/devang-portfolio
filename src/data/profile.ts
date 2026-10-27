@@ -49,7 +49,7 @@ export const stats = [
   { value: 5, suffix: "+", label: "KYC / identity providers" },
   { value: 20, suffix: "+", label: "Security audit findings fixed" },
   { value: 6, suffix: "", label: "Engineers led" },
-  { value: 1900, suffix: "+", label: "Tests in one Rust service" },
+  { value: 12, suffix: "", label: "Domains shipped" },
 ];
 
 export const tickerItems = [
@@ -62,16 +62,15 @@ export const tickerItems = [
   "MySQL",
   "MSSQL",
   "PHP · CodeIgniter",
-  "Sumsub KYC",
-  "Stripe · PayPal",
-  "Fireblocks",
+  "Express",
+  "e-KYC integration",
+  "Payment gateway integration",
   "wagmi · viem",
-  "Safe 3-of-5",
   "ECC · AES · RSA",
   "WebAssembly",
-  "Rust",
   "tRPC",
-  "UniswapX",
+  "Redux-Saga",
+  "Tailwind",
   "Docker",
   "Azure Container Apps",
   "GitHub Actions CI/CD",
@@ -87,22 +86,34 @@ export const domainShowcase: { title: string; text: string; visual: VisualKind }
   { title: "Money Transfer", text: "DMT / IMPS, AEPS, remittance via bank APIs", visual: "remittance" },
   { title: "Crypto Exchanges", text: "Ohocash, Paro, white-label for 8+ brands", visual: "exchange" },
   { title: "Web3 & DeFi", text: "Staking, money market, Safe multisig, vaults", visual: "intent" },
-  { title: "Trading & Hedging", text: "UniswapX, 1inch, CoW, OKX solver, Rust hedge", visual: "hedge" },
+  { title: "Trading & Hedging", text: "Filler & solver integrations, hedging dashboards (AI-assisted)", visual: "hedge" },
   { title: "Travel Booking", text: "Flights with TBO API, caching, ticketing", visual: "travel" },
   { title: "E-commerce", text: "OpenCart stores, grocery marketplace", visual: "ecommerce" },
   { title: "MLM Platforms", text: "Genealogy trees, level commissions, e-wallet", visual: "mlm" },
   { title: "APIs & DevOps", text: "Node / PHP / .NET APIs, Docker, Azure CI/CD", visual: "devops" },
 ];
 
+// A customer's journey through the systems I've built, start to finish.
+export const flowStages: { title: string; text: string; visual: VisualKind; tags: string[] }[] = [
+  { title: "Onboard · e-KYC", text: "ID card OCR, video liveness and AML checks before an account exists — City Bank, Zeebu KYC / KYB, Aadhaar e-KYC.", visual: "kyc", tags: ["Sumsub", "Jumio", "Aadhaar", "NID OCR", "Liveness"] },
+  { title: "Open account", text: "Rule-driven onboarding across agent, branch and self channels; one submit fans out to 6+ bank APIs.", visual: "banking", tags: ["React", "Redux-Saga", "JSON config", "Bank APIs"] },
+  { title: "Pay", text: "Card, UPI and net-banking through 15+ gateways — authorise, capture, refund, webhooks and 3-D Secure.", visual: "payment", tags: ["Stripe", "PayPal", "PayU", "CCAvenue", "Paystack"] },
+  { title: "Wallet", text: "35+ wallet services per role — P2P, cash-in / out, bills, airtime, QR pay — in English, Arabic and Kurdish.", visual: "wallet", tags: ["NassWallet", "QCell", "Rupio", "RTL"] },
+  { title: "Transfer", text: "Domestic money transfer (IMPS / NEFT), AEPS and cross-border remittance with AES + RSA encrypted calls.", visual: "remittance", tags: ["ICICI", "RBL", "AU", "AES + RSA"] },
+  { title: "Trade", text: "Crypto exchanges with live order books over WebSocket / SignalR — Ohocash, Paro and a white-label for 8+ brands.", visual: "exchange", tags: ["React", ".NET", "SignalR", "TradingView"] },
+  { title: "On-chain", text: "Web2 → Web3: wallet sign-in, staking, money market, Safe multisig and savings vaults.", visual: "intent", tags: ["wagmi", "viem", "ethers", "Safe SDK"] },
+  { title: "Ship", text: "Docker images through GitHub Actions to Azure Container Apps and Web Apps, UAT → prod.", visual: "devops", tags: ["Docker", "GitHub Actions", "Azure"] },
+];
+
 export const about = {
   summary:
-    "Front-End Team Lead who also works full-stack. I started in PHP (CodeIgniter, OpenCart), grew through AngularJS and React, and today build with Next.js, Node.js and TypeScript on MSSQL, MySQL, MongoDB and PostgreSQL. My strongest areas are payments and KYC integrations, API security, performance tuning and reusable component libraries — and I lead the team that ships them.",
+    "Front-End Team Lead who also works full-stack. I started in PHP (CodeIgniter, OpenCart), grew through AngularJS and React, and today build with Next.js, Node.js and TypeScript on MSSQL, MySQL, MongoDB and PostgreSQL. My strongest areas are payments and KYC integrations, API security, performance tuning and implementing reusable component libraries — and I lead the team that ships them.",
   highlights: [
     "Lead a team of 6 engineers — people manager since 2022: sprint planning, code review, hiring, mentoring, releases",
     "50+ fintech products: exchanges, wallets, money transfer, digital banking, DeFi",
     "15+ payment gateways and 5+ KYC providers integrated end to end",
     "20+ security audit findings fixed · ECC / AES / RSA encrypted APIs",
-    "Own libraries: ECC encryption npm package, 35-control form engine, React component kit",
+    "Implemented and tested shared libraries across portals: ECC encryption npm package, 35-control form engine, React component kit",
   ],
   domains: [
     "Fintech",
@@ -127,7 +138,7 @@ export const about = {
     layers: [
       { name: "UI", tech: "React · Next.js · TypeScript · Tailwind · AngularJS" },
       { name: "API", tech: "Node.js · Express · tRPC · REST · GraphQL · PHP" },
-      { name: "Services", tech: "BullMQ jobs · WebSockets · Rust workers · cron" },
+      { name: "Realtime", tech: "WebSockets · Socket.io · SignalR · cron jobs" },
       { name: "Data", tech: "PostgreSQL · MongoDB · MySQL · MSSQL · Redis" },
       { name: "Ship", tech: "Docker · GitHub Actions CI/CD · Azure Web Apps · Container Apps" },
     ],
@@ -163,7 +174,7 @@ export const experience: Job[] = [
       "Lead a 6-engineer front-end team for Zeebu (telecom settlement & loyalty) and ORBT (intent-based DeFi) — architecture, sprint planning, code review, hiring, mentoring and 100+ production releases.",
       "Moved Zeebu from Web2 to Web3 in three steps — MetaMask + ethers.js → wagmi with a custom wallet connector → Reown AppKit — with staking, withdraw, bonus, referral commission and wallet-signature registration.",
       "Integrated Money Market (Aave-style) and ORBT contracts — supply / borrow / repay, ERC-4626 savings vaults, Safe multisig flows — with Multicall batching and subgraph data.",
-      "Built the DeFi trading stack: UniswapX / 1inch Fusion filler, OKX and CoW solvers, keeper and rebalancer, a treasury dashboard (980 commits) and a Rust hedge module for PERP and X-PERP.",
+      "Built the DeFi trading stack: UniswapX / 1inch Fusion filler, OKX and CoW solvers, keeper and rebalancer, a treasury dashboard (980 commits) and a PERP / X-PERP hedge module — the Rust services built with Claude Code (AI), which I specified, reviewed and tested.",
       "Build and ship every service myself: Docker images to Azure Container Registry, GitHub Actions CI/CD with UAT → prod promotion, deploys to Azure Container Apps and Web Apps; Azure → AWS KMS federation for signing.",
       "Owned security: OAK Security audit remediation, encrypted payloads, nonce / replay and MITM protection, throttling, CSP — 20+ findings fixed.",
     ],
@@ -179,7 +190,7 @@ export const experience: Job[] = [
       "Front-end lead for MobiFin banking and wallet portals for banks and telcos — NassWallet (Iraq), QCell / QMoney (Gambia), City Bank (Bangladesh), CRDB (Tanzania), 9PSB (Nigeria), Tangerine, ColtoMoney.",
       "Designed a configuration-driven portal engine: screens, forms and services render from JSON / CMS config per role — new services ship without a redeploy.",
       "Built City Bank's digital account opening: huge rule-driven forms, NID card OCR and validation, video liveness, 6+ API fan-out.",
-      "Wrote the ECC encryption npm package (checksum + signature), added replay / MITM protection and throttling, ran Go → WebAssembly crypto R&D, and tuned Webpack builds.",
+      "Implemented and tested the in-house ECC encryption npm package (checksum + signature), added replay / MITM protection and throttling, ran Go → WebAssembly crypto R&D, and tuned Webpack builds.",
     ],
   },
   {
@@ -269,7 +280,7 @@ export const projects: Project[] = [
     year: "2026",
     visual: "dashboard",
     featured: true,
-    stack: ["Next.js 14", "tRPC v11", "Drizzle", "PostgreSQL", "BullMQ", "Redis", "Safe SDK", "AWS KMS", "Docker", "Azure Container Apps", "Claude Code"],
+    stack: ["Next.js 14", "tRPC v11", "Drizzle", "PostgreSQL", "BullMQ (AI-written)", "Redis", "Safe SDK", "AWS KMS", "Docker", "Azure Container Apps", "Claude Code"],
     points: [
       "Lead author (980 commits): 3-of-5 Gnosis Safe across 5 EVM chains with propose → sign → execute flows, delegates, whitelisting and signed-message login.",
       "Treasury, money-market, executor, filler, maker, pocket and OKX views — PnL, solvency, reconciliation, rebalancing and alerts.",
@@ -278,13 +289,13 @@ export const projects: Project[] = [
   },
   {
     title: "Hedge Module — PERP & X-PERP",
-    domain: "Trading · risk · hedging",
+    domain: "Trading · risk · hedging · AI-built",
     year: "2026",
     visual: "hedge",
     featured: true,
-    stack: ["Rust", "tokio", "axum", "sqlx", "PostgreSQL", "Redis Streams", "OKX v5"],
+    stack: ["Claude Code (AI)", "Rust (AI-written)", "PostgreSQL", "Redis", "OKX v5 API"],
     points: [
-      "Sole author: 11-crate Rust workspace (~70k lines, 1,900+ tests, 20 migrations) hedging on-chain fills on OKX spot, perpetuals and dated futures.",
+      "Built end to end with Claude Code: I wrote the spec, risk rules and test plan, the AI wrote the Rust, and I reviewed and tested every change — 11 crates, 1,900+ tests, hedging fills on OKX spot, perpetuals and dated futures.",
       "OCO brackets, trailing stops, reprice ladder and long / short netting; exposure caps per asset / side / route and a kill switch.",
       "HMAC-signed API with replay protection, PnL attribution, Telegram alerts and an operator console.",
     ],
@@ -295,12 +306,12 @@ export const projects: Project[] = [
     year: "2026",
     visual: "intent",
     featured: true,
-    stack: ["TypeScript", "Node.js", "Rust", "ethers v6", "alloy", "UniswapX", "1inch Fusion", "CoW Protocol", "OKX", "AWS KMS", "PostgreSQL", "Docker", "Azure Container Apps"],
+    stack: ["TypeScript", "Node.js", "ethers v6", "PostgreSQL", "AWS KMS", "Docker", "Azure Container Apps", "Claude Code (AI)"],
     points: [
       "Filler service (335 commits): inventory-backed UniswapX Dutch-order and 1inch Fusion filler — pre-fill simulation, multi-venue quoting off the OKX book, post-fill hedging, per-venue gas-tier ladders, exclusive-window re-simulate / replace and MEV-aware submit lanes.",
       "Risk controls: fleet-wide $500k open-volume cap measured off the live OKX book, volatility gate, quote pause across the fleet, per-pair markup and buy / sell switches from a live config console.",
-      "OKX intent solver in Rust (137 commits): /quote → /solve → /settle with EIP-712 signing and KMS broadcast, OKX spot + perp hedging; Multicall batching cut RPC load ~138k → ~49k calls / day.",
-      "CoW Protocol solver (Rust engine + driver): dry-run master switch, Redis-down salvage of financial writes, JIT ERC-1271 settlement from executor inventory.",
+      "OKX intent solver (137 commits, Rust written with Claude Code): /quote → /solve → /settle with EIP-712 signing and KMS broadcast, OKX spot + perp hedging; Multicall batching cut RPC load ~138k → ~49k calls / day.",
+      "CoW Protocol solver (AI-written Rust, my config and testing): dry-run master switch, Redis-down salvage of financial writes, JIT ERC-1271 settlement from executor inventory.",
       "Each service shipped as a Docker image through GitHub Actions to Azure Container Apps, with per-venue dry-run and UAT / pre-prod / prod pipelines.",
       "Ops around it: keeper bot with Multicall3 reconcile and per-venue hedge registry, cross-chain rebalancer with Azure → AWS KMS signing, and a solver-stats dashboard with 3-tier fallback.",
     ],
@@ -338,7 +349,7 @@ export const projects: Project[] = [
     stack: ["React", "Redux-Saga", ".NET API", "SignalR", "WebSocket", "TradingView", "CodeIgniter"],
     points: [
       "Started as CodeIgniter + MySQL; rebuilt as a React + Redux-Saga trading UI on a .NET API — live order book, trades and ticker over SignalR / WebSocket.",
-      "Built the reusable Jbs* component library (layout, cards, data tables, loaders) that became a white-label exchange used for 8+ brands (Cooldex, Worldex, Uniq and more).",
+      "Implemented the Jbs* component library (layout, cards, data tables, loaders) across the product, which became a white-label exchange used for 8+ brands (Cooldex, Worldex, Uniq and more).",
       "Spot trading with limit / stop orders, deposits, withdrawals, 2FA, KYC, referrals and admin panels.",
     ],
   },
@@ -408,14 +419,14 @@ export const projects: Project[] = [
     ],
   },
   {
-    title: "ECC Encryption npm Package & Form Engine",
-    domain: "Custom libraries · reuse",
+    title: "ECC Encryption & Form Engine — Implementation",
+    domain: "Shared libraries · integration & testing",
     year: "2021",
     visual: "api",
     stack: ["npm", "ECC", "AES", "TypeScript", "React"],
     points: [
-      "ecc-node-package: ECC key exchange + AES payload encryption with checksum and signature, shared by Node.js services and React portals.",
-      "form-input-controls: 35 reusable, config-driven form controls powering every MobiFin portal.",
+      "Implemented and tested the in-house ecc-node-package — ECC key exchange + AES payload encryption with checksum and signature — across Node.js services and React portals.",
+      "Integrated the form-input-controls package (35 config-driven controls) into every MobiFin portal and tested each flow.",
     ],
   },
   {
@@ -458,8 +469,8 @@ export const caseStudies = [
     problem:
       "Digital account opening with ID OCR, video liveness and huge forms. Bank required encrypted payloads plus replay and MITM protection — in the browser.",
     solution:
-      "ECC key exchange + AES, checksum and signature per request, nonce + timestamp, throttling. Packaged as an npm library; Go → WebAssembly for fast crypto.",
-    result: "Passed the bank security review; the library became standard for every MobiFin portal.",
+      "ECC key exchange + AES, checksum and signature per request, nonce + timestamp, throttling. Implemented with the in-house ECC npm package; Go → WebAssembly for fast crypto.",
+    result: "Passed the bank security review; the same setup rolled out to every MobiFin portal.",
     market: "Security & KYC",
   },
   {
@@ -491,8 +502,8 @@ export const caseStudies = [
     problem:
       "Filled trades leave price risk that must be hedged instantly on OKX spot, perps and futures — no double orders, hard stop on failure.",
     solution:
-      "Rust from scratch: netting, OCO brackets, trailing stops, exposure caps, kill switch, HMAC-signed API with replay protection, PnL attribution.",
-    result: "Sole author — 11 crates, ~70k lines, 1,900+ tests; risk limits enforced in code.",
+      "I wrote the spec and risk rules; Claude Code wrote the Rust — netting, OCO brackets, trailing stops, exposure caps, kill switch, signed API; I reviewed and tested every change.",
+    result: "Shipped in under 6 weeks with 1,900+ tests — without me writing Rust by hand.",
     market: "AI-built, test-heavy",
   },
   {
@@ -502,9 +513,9 @@ export const caseStudies = [
     problem:
       "CodeIgniter exchange was hard to scale and every new client brand meant copying the codebase.",
     solution:
-      "Rebuilt in React + Redux-Saga on a .NET API with real-time SignalR order book and a reusable Jbs* component library.",
+      "Rebuilt in React + Redux-Saga on a .NET API with real-time SignalR order book, using the Jbs* component library.",
     result: "Became a white-label exchange used for 8+ brands.",
-    market: "Reusable libraries",
+    market: "Legacy → modern",
   },
 ];
 
@@ -518,8 +529,8 @@ export const faq = [
     a: "15+ payment gateways (Stripe, PayPal, Paystack, CCAvenue, PayU, Atom…), KYC (Sumsub, Jumio, Trulioo, Aadhaar e-KYC, NID OCR + liveness), bank IMPS APIs, Fireblocks, Safe, BitGo, Binance and OKX APIs, TBO travel.",
   },
   {
-    q: "Have you built your own libraries?",
-    a: "Yes — an ECC encryption npm package, a 35-control config-driven form engine, the Jbs* React component kit, a JSON menu / permission system and a custom wagmi wallet connector.",
+    q: "Have you worked with shared libraries?",
+    a: "Yes — I implemented and tested in-house libraries provided by the platform teams: an ECC encryption npm package, a 35-control config-driven form engine and the Jbs* React component kit; I also built a custom wagmi wallet connector.",
   },
   {
     q: "How do you optimise front-end performance?",
@@ -535,7 +546,7 @@ export const faq = [
   },
   {
     q: "How do you use AI?",
-    a: "Daily with Claude Code: spec → plan → implement → review. The Finance Center and the Rust hedge module were built this way — every change human-reviewed and tested.",
+    a: "Daily with Claude Code: spec → plan → implement → review. The Finance Center and the hedge module were built this way — the AI writes code (including Rust, which I don't write by hand), and I own the spec, review and testing.",
   },
   {
     q: "Notice period and location?",
@@ -550,7 +561,7 @@ export const skills = [
   },
   {
     group: "Back-End",
-    items: ["Node.js", "Express", "tRPC", "REST", "GraphQL / Apollo", "BFF / adapter layers", "BullMQ", "cron jobs", "PHP (CodeIgniter 2–4)", "OpenCart", ".NET WebAPI", "Rust (tokio, axum, sqlx)", "Python"],
+    items: ["Node.js", "Express", "tRPC", "REST", "GraphQL / Apollo", "BFF / adapter layers", "cron jobs", "PHP (CodeIgniter 2–4)", "OpenCart", ".NET WebAPI"],
   },
   {
     group: "Databases",
@@ -569,7 +580,7 @@ export const skills = [
     items: ["Webpack 4 / 5 splitChunks", "Tree-shaking & compression", "Code splitting", "React.lazy / react-loadable", "Memoisation", "Virtualised tables", "Redis / result caching", "Multicall batching", "WebAssembly (Go / TinyGo)"],
   },
   {
-    group: "Custom Libraries",
+    group: "Libraries Implemented",
     items: ["ECC encryption npm package", "35-control form engine", "Jbs* React component kit", "JSON menu & permissions", "Custom wagmi connector", "Shared filter / report kit", "Tailwind token system"],
   },
   {
@@ -578,7 +589,7 @@ export const skills = [
   },
   {
     group: "Web3 & Trading",
-    items: ["wagmi v2", "viem", "ethers", "Reown AppKit", "RainbowKit", "WalletConnect", "Safe SDK", "Solidity", "Foundry", "ERC-20 / 721 / 4626", "EIP-712 / 1271", "The Graph", "1inch Fusion", "UniswapX", "Flashbots"],
+    items: ["wagmi v2", "viem", "ethers", "Reown AppKit", "RainbowKit", "WalletConnect", "Safe SDK", "Solidity", "Foundry", "ERC-20 / 721 / 4626", "EIP-712 / 1271", "The Graph", "DEX / intent API integration"],
   },
   {
     group: "DevOps & Cloud",
@@ -616,13 +627,15 @@ export const edge = [
   {
     icon: "bot",
     title: "AI-native engineering",
+    visual: "devops" as VisualKind,
     signal: "Teams now hire engineers who ship faster with AI — without lowering the bar.",
-    proof: "Daily Claude Code workflow: 2,000+ AI-assisted commits, 10 custom subagents; a 70k-line Rust service with 1,900+ tests, every change human-reviewed.",
+    proof: "Daily Claude Code workflow: 2,000+ AI-assisted commits, 10 custom subagents; AI-written Rust services I specified, reviewed and tested (1,900+ tests).",
     tags: ["Claude Code", "Agentic workflows", "AI code review"],
   },
   {
     icon: "coins",
     title: "Payments, KYC & digital banking",
+    visual: "payment" as VisualKind,
     signal: "Digital banking, stablecoins and cross-border payments keep growing — real integration experience is rare.",
     proof: "15+ payment gateways, 5+ KYC providers (Sumsub, Jumio, Aadhaar, NID OCR + liveness), bank IMPS APIs, Fireblocks and Safe — for banks in 6+ countries.",
     tags: ["Payments", "e-KYC", "Banking APIs", "Web3"],
@@ -630,6 +643,7 @@ export const edge = [
   {
     icon: "layers",
     title: "Full-stack TypeScript, MERN & DevOps",
+    visual: "api" as VisualKind,
     signal: "Leaner teams want leads who own a feature from UI to database.",
     proof: "Next.js + React on top, Node.js / Express / tRPC in the middle, PostgreSQL, MongoDB, MySQL, MSSQL and Redis underneath — and I ship it myself with Docker, GitHub Actions CI/CD, Azure Web Apps and Container Apps.",
     tags: ["Next.js", "Node.js", "MERN", "Docker", "Azure"],
@@ -637,20 +651,23 @@ export const edge = [
   {
     icon: "shield",
     title: "Security-first front-ends",
+    visual: "kyc" as VisualKind,
     signal: "Regulated money products face audits and real attacks — security can't be an afterthought.",
-    proof: "ECC / AES / RSA encrypted APIs, replay and MITM protection, throttling, CSP, own ECC npm library — 20+ audit findings fixed.",
+    proof: "ECC / AES / RSA encrypted APIs, replay and MITM protection, throttling, CSP, in-house ECC npm library implemented — 20+ audit findings fixed.",
     tags: ["Encryption", "Audits", "Replay protection"],
   },
   {
     icon: "activity",
     title: "Performance & reusable libraries",
+    visual: "dashboard" as VisualKind,
     signal: "Fast apps on slow networks and design systems that scale teams are what product companies pay for.",
-    proof: "Webpack tuning, code splitting, virtualised tables, Multicall batching (138k → 49k RPC calls/day), WebAssembly; own form engine and component kits reused across 8+ brands.",
+    proof: "Webpack tuning, code splitting, virtualised tables, Multicall batching (138k → 49k RPC calls/day), WebAssembly; implemented shared form engine and component kits across 8+ brands.",
     tags: ["Core Web Vitals", "Design systems", "WASM"],
   },
   {
     icon: "users",
     title: "Team leadership",
+    visual: "mlm" as VisualKind,
     signal: "Senior engineers who can lead, mentor and release reliably are the hardest hires.",
     proof: "Lead a team of 6 engineers; people manager since 2022 — sprint planning, code standards, reviews, hiring, mentoring, client calls and 100+ releases. Person of the Year 2018/19.",
     tags: ["Lead", "Mentoring", "Release"],

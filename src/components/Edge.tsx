@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Activity, Bot, Coins, Layers, ShieldCheck, Users } from "lucide-react";
 import { edge } from "@/data/profile";
 import { BlockHeader } from "./BlockHeader";
+import { ProjectVisual } from "./visuals/Visuals";
 
 const icons = { bot: Bot, coins: Coins, activity: Activity, layers: Layers, users: Users, shield: ShieldCheck } as const;
 const accents = ["text-cyan", "text-amber", "text-emerald", "text-violet", "text-pink-400", "text-rose"];
@@ -35,6 +36,9 @@ export function Edge() {
               className="group relative flex flex-col overflow-hidden rounded-2xl p-6 glass"
             >
               <div className="absolute -right-10 -top-10 h-32 w-32 rounded-full bg-violet/10 blur-3xl transition group-hover:bg-cyan/20" />
+              <div className="relative -mx-6 -mt-6 mb-5 h-28 border-b border-line bg-panel/50 px-4 py-2">
+                <ProjectVisual kind={e.visual} />
+              </div>
               <div className="flex items-center gap-3">
                 <span className={`grid h-10 w-10 place-items-center rounded-xl border border-line bg-panel ${accents[i]}`}>
                   <Icon className="h-5 w-5" />

@@ -24,9 +24,9 @@
 
 - **Digital banking & e-KYC:** City Bank (Bangladesh) account opening with NID OCR and video liveness; NassWallet config-driven wallet platform with 35+ services
 - **Payments:** 15+ gateways (Stripe, PayPal, Paystack, CCAvenue, PayU…), bank IMPS APIs, Fireblocks, Safe, BitGo
-- **Web3 & DeFi:** Zeebu Web2 → Web3 migration, Money Market and ORBT contract integrations, UniswapX / 1inch Fusion / CoW / OKX fillers and solvers, Rust hedge module
+- **Web3 & DeFi:** Zeebu Web2 → Web3 migration, Money Market and ORBT contract integrations, filler and solver integrations, AI-built hedge module
 - **Security:** ECC / AES / RSA encrypted APIs, replay and MITM protection, 20+ audit findings fixed
-- **Own libraries:** ECC encryption npm package, 35-control form engine, React component kits
+- **Libraries implemented and tested:** in-house ECC encryption npm package, 35-control form engine, React component kits
 - **DevOps:** Docker, GitHub Actions CI/CD, Azure Web Apps and Container Apps
 
 ## Tech

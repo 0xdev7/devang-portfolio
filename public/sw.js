@@ -1,6 +1,6 @@
 // Offline support: pages network-first (fresh content when online),
 // static assets cache-first (hashed by Next, safe to keep).
-const CACHE = "devang-v2";
+const CACHE = "devang-v3";
 const PRECACHE = ["/", "/images/devang.jpg", "/icons/icon-192.png", "/icons/icon-512.png"];
 
 self.addEventListener("install", (e) => {
