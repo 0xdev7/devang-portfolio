@@ -2,18 +2,44 @@
 
 import { motion } from "framer-motion";
 import { GraduationCap, Languages, Award } from "lucide-react";
-import { about } from "@/data/profile";
+import { about, domainShowcase } from "@/data/profile";
 import { BlockHeader } from "./BlockHeader";
-import { Candles, Chain, MlmTree, Remittance } from "./visuals/Visuals";
-
-const domainCards = [
-  { title: "Blockchain & DeFi", text: "Safe multisig, intents, vaults, MEV", Visual: Chain },
-  { title: "Fintech & Trading", text: "Exchanges, order books, hedging", Visual: Candles },
-  { title: "Money Transfer", text: "Remittance, FX rate-lock, payouts", Visual: Remittance },
-  { title: "MLM Platforms", text: "Genealogy trees, level commissions", Visual: MlmTree },
-];
+import { ProjectVisual } from "./visuals/Visuals";
 
 const layerColors = ["text-cyan", "text-violet", "text-pink-400", "text-emerald", "text-amber"];
+
+function Domains() {
+  return (
+    <div className="mt-16">
+      <div className="font-mono text-xs text-violet">{"// domains.map(shipped)"}</div>
+      <h3 className="mt-2 text-2xl font-bold leading-snug sm:text-3xl">
+        12 domains, <span className="text-gradient">one engineer who has shipped in all of them.</span>
+      </h3>
+      <div className="mt-6 grid grid-cols-2 gap-2 sm:gap-3 lg:grid-cols-4">
+        {domainShowcase.map((d, i) => (
+          <motion.div
+            key={d.title}
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-40px" }}
+            transition={{ delay: (i % 4) * 0.08 }}
+            whileHover={{ y: -6 }}
+            className="group rounded-2xl p-2.5 glass sm:p-4"
+          >
+            <div className="h-20 rounded-xl sm:h-28 border border-line/60 bg-panel/50 p-1 transition group-hover:border-cyan/40">
+              <ProjectVisual kind={d.visual} />
+            </div>
+            <div className="mt-3 flex items-center justify-between gap-2">
+              <span className="text-sm font-semibold sm:text-base">{d.title}</span>
+              <span className="hidden font-mono text-[10px] text-muted sm:inline">{String(i + 1).padStart(2, "0")}</span>
+            </div>
+            <div className="mt-0.5 line-clamp-2 text-[11px] leading-relaxed text-muted sm:line-clamp-none sm:text-xs">{d.text}</div>
+          </motion.div>
+        ))}
+      </div>
+    </div>
+  );
+}
 
 function FullStack() {
   const fs = about.fullStack;
@@ -78,7 +104,7 @@ export function About() {
     <section id="about" className="relative mx-auto max-w-6xl scroll-mt-24 px-5 py-16 md:py-24">
       <BlockHeader
         block={2}
-        kicker="// about.sol"
+        kicker="// about.me"
         title={
           <>
             I build the <span className="text-gradient">front-ends money moves through.</span>
@@ -107,7 +133,7 @@ export function About() {
                 transition={{ delay: i * 0.1 }}
                 className="flex items-start gap-3"
               >
-                <span className="mt-1 font-mono text-xs text-emerald">tx{i + 1} ✓</span>
+                <span className="mt-1 font-mono text-xs text-emerald">✓</span>
                 <span>{h}</span>
               </motion.li>
             ))}
@@ -121,45 +147,35 @@ export function About() {
             ))}
           </div>
 
-          <div className="mt-10 grid gap-3 sm:grid-cols-3">
-            <div className="rounded-xl p-4 glass">
-              <GraduationCap className="mb-2 h-5 w-5 text-cyan" />
-              {about.education.map((e) => (
-                <div key={e} className="text-xs text-muted">{e}</div>
-              ))}
-            </div>
-            <div className="rounded-xl p-4 glass">
-              <Award className="mb-2 h-5 w-5 text-violet" />
-              <div className="text-xs text-muted">{about.certification}</div>
-            </div>
-            <div className="rounded-xl p-4 glass">
-              <Languages className="mb-2 h-5 w-5 text-emerald" />
-              <div className="text-xs text-muted">{about.languages.join(" · ")}</div>
-            </div>
-          </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-3">
-          {domainCards.map(({ title, text, Visual }, i) => (
+        <div className="grid content-start gap-3">
+          {[
+            { Icon: GraduationCap, cls: "text-cyan", label: "Education", lines: about.education },
+            { Icon: Award, cls: "text-violet", label: "Certifications", lines: [about.certification] },
+            { Icon: Languages, cls: "text-emerald", label: "Languages", lines: [about.languages.join(" · ")] },
+          ].map(({ Icon, cls, label, lines }, i) => (
             <motion.div
-              key={title}
-              initial={{ opacity: 0, y: 24, rotateX: 20 }}
-              whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
+              key={label}
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.12 }}
-              whileHover={{ y: -6 }}
-              className="rounded-2xl p-4 glass"
+              transition={{ delay: i * 0.1 }}
+              className="flex gap-4 rounded-2xl p-5 glass"
             >
-              <div className="h-28">
-                <Visual />
+              <Icon className={`mt-0.5 h-5 w-5 shrink-0 ${cls}`} />
+              <div>
+                <div className="font-mono text-[10px] uppercase tracking-wider text-muted">{label}</div>
+                {lines.map((l) => (
+                  <div key={l} className="mt-1 text-sm text-text/85">{l}</div>
+                ))}
               </div>
-              <div className="mt-3 font-semibold">{title}</div>
-              <div className="text-xs text-muted">{text}</div>
             </motion.div>
           ))}
         </div>
       </div>
 
+      <Domains />
       <FullStack />
     </section>
   );

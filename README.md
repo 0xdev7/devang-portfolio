@@ -13,7 +13,7 @@
 | Section | What it shows |
 |---|---|
 | **Why me** | Six strengths matched to current hiring demand: AI-native engineering, payments & KYC, full-stack + DevOps, security, performance, leadership |
-| **About** | Full-stack story — PHP → AngularJS → React → Next.js, with Node.js on MSSQL, MySQL, MongoDB and PostgreSQL |
+| **About** | Full-stack story (PHP → AngularJS → React → Next.js) and 12 animated domain cards: digital banking, e-KYC, payment gateways, wallets, money transfer, exchanges, Web3, trading, travel, e-commerce, MLM, APIs & DevOps |
 | **Experience** | Bankai Infotech (Team Lead and Principal Consultant), Joshi Biztech, Cantech — 2012 to now |
 | **Cases** | Hard problems told as problem → solution → result, plus a recruiter FAQ |
 | **Projects** | 18 projects, filterable by Fintech, KYC & Payments, Web3, Trading, Full-stack, Libraries and AI-built |
@@ -33,7 +33,7 @@
 
 Next.js 15 (App Router) · React 19 · TypeScript · Tailwind CSS v4 · Framer Motion · React Three Fiber + drei · Lenis smooth scroll · lucide-react · installable PWA
 
-The design is a blockchain ledger: every section is a "block", the hero is a 3D chain, and each project has its own animated graphic. It works on phones (no WebGL under 767 px, bottom-sheet project details, hamburger nav).
+The design is a "fintech systems" theme: each section reads like an event from a system I have built (KYC verified, payment captured, build passing, deployed), the 3D hero shows cards, ID, coins, blocks and servers orbiting one core, and every domain and project has its own animated graphic. It works on phones (no WebGL under 767 px, bottom-sheet project details, hamburger nav).
 
 ## Run locally
 

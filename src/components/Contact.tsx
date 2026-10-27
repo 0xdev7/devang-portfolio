@@ -43,7 +43,7 @@ export function Contact() {
         kicker="// contact.send()"
         title={
           <>
-            Let&apos;s ship <span className="text-gradient">the next block together.</span>
+            Let&apos;s ship <span className="text-gradient">the next product together.</span>
           </>
         }
       />
@@ -77,16 +77,16 @@ export function Contact() {
         <div className="rounded-2xl p-6 glass">
           <div className="mb-5 flex items-center justify-between font-mono text-xs">
             <span className="text-muted">Send transaction</span>
-            <span className="rounded-md bg-emerald/10 px-2 py-0.5 text-emerald">gas: free</span>
+            <span className="rounded-md bg-emerald/10 px-2 py-0.5 text-emerald">fee: ₹0</span>
           </div>
           <div className="space-y-3 font-mono text-sm">
             <div className="rounded-xl border border-line bg-panel p-3">
               <div className="text-[10px] text-muted">FROM</div>
-              <div className="text-text/80">you.eth</div>
+              <div className="text-text/80">you@company.com</div>
             </div>
             <div className="rounded-xl border border-line bg-panel p-3">
               <div className="text-[10px] text-muted">TO</div>
-              <div className="text-cyan">devang.eth · {profile.email}</div>
+              <div className="text-cyan">{profile.email}</div>
             </div>
             <div className="rounded-xl border border-line bg-panel p-3">
               <div className="text-[10px] text-muted">DATA</div>
@@ -104,7 +104,7 @@ export function Contact() {
             disabled={sent}
             className="mt-5 w-full rounded-xl bg-gradient-to-r from-cyan to-violet py-3 font-semibold text-ink transition hover:brightness-110 disabled:opacity-80"
           >
-            {sent ? "Signing… broadcasting ✓" : "Sign & send"}
+            {sent ? "Encrypting… sent ✓" : "Encrypt & send"}
           </button>
         </div>
       </div>

@@ -3,7 +3,7 @@
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { ArrowDown, CheckCircle2, MapPin, ShieldCheck, TrendingUp } from "lucide-react";
+import { ArrowDown, CheckCircle2, CreditCard, MapPin, Rocket, ScanFace } from "lucide-react";
 import { useEffect, useState } from "react";
 import { profile } from "@/data/profile";
 
@@ -65,9 +65,10 @@ function SplitName({ text, delay, className }: { text: string; delay: number; cl
 }
 
 const badges = [
-  { icon: ShieldCheck, text: "Safe 3-of-5 · signed", cls: "-left-10 top-10 text-emerald", delay: 2.2 },
-  { icon: TrendingUp, text: "PnL +2.41%", cls: "-right-8 top-1/3 text-cyan", delay: 2.5 },
-  { icon: CheckCircle2, text: "Tx confirmed · 12/12", cls: "-left-6 bottom-16 text-violet", delay: 2.8 },
+  { icon: ScanFace, text: "KYC verified · liveness ✓", cls: "-left-12 top-8 text-emerald", delay: 2.2 },
+  { icon: CreditCard, text: "Payment captured · ₹2,499", cls: "-right-10 top-1/3 text-cyan", delay: 2.5 },
+  { icon: CheckCircle2, text: "Tx confirmed · 12/12", cls: "-left-8 bottom-24 text-violet", delay: 2.8 },
+  { icon: Rocket, text: "Deployed · Azure", cls: "-right-6 bottom-8 text-amber", delay: 3.1 },
 ];
 
 function useWebGL() {
@@ -151,7 +152,7 @@ export function Hero() {
               href="#projects"
               className="rounded-xl bg-gradient-to-r from-cyan to-violet px-5 py-3 text-center font-semibold text-ink shadow-[0_0_30px_rgba(34,211,238,0.35)] transition hover:brightness-110"
             >
-              Explore the ledger
+              Explore my work
             </a>
             <a href="#about" className="rounded-xl border border-line px-5 py-3 text-center font-semibold transition hover:border-cyan hover:text-cyan">
               About me
@@ -205,7 +206,7 @@ export function Hero() {
       </div>
 
       <a href="#about" className="absolute bottom-6 left-1/2 hidden md:flex -translate-x-1/2 flex-col items-center gap-1 font-mono text-[11px] text-muted">
-        scroll to mine next block
+        scroll to explore
         <motion.span animate={{ y: [0, 6, 0] }} transition={{ repeat: Infinity, duration: 1.6 }}>
           <ArrowDown className="h-4 w-4" />
         </motion.span>

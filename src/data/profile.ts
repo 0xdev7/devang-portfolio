@@ -11,7 +11,13 @@ export type VisualKind =
   | "exchange"
   | "remittance"
   | "mlm"
-  | "travel";
+  | "travel"
+  | "payment"
+  | "kyc"
+  | "banking"
+  | "ecommerce"
+  | "api"
+  | "devops";
 
 export const profile = {
   name: "Devang Parekh",
@@ -70,6 +76,22 @@ export const tickerItems = [
   "Azure Container Apps",
   "GitHub Actions CI/CD",
   "Claude Code",
+];
+
+// Every domain I've shipped in, each with its own animated graphic.
+export const domainShowcase: { title: string; text: string; visual: VisualKind }[] = [
+  { title: "Digital Banking", text: "Account opening, agency banking — City Bank, CRDB, 9PSB", visual: "banking" },
+  { title: "e-KYC & Identity", text: "Sumsub, Jumio, Aadhaar, NID OCR, video liveness", visual: "kyc" },
+  { title: "Payment Gateways", text: "Stripe, PayPal, PayU, CCAvenue, Paystack — 15+", visual: "payment" },
+  { title: "E-Wallets", text: "NassWallet, QCell, Rupio — 35+ services per role", visual: "wallet" },
+  { title: "Money Transfer", text: "DMT / IMPS, AEPS, remittance via bank APIs", visual: "remittance" },
+  { title: "Crypto Exchanges", text: "Ohocash, Paro, white-label for 8+ brands", visual: "exchange" },
+  { title: "Web3 & DeFi", text: "Staking, money market, Safe multisig, vaults", visual: "intent" },
+  { title: "Trading & Hedging", text: "UniswapX, 1inch, CoW, OKX solver, Rust hedge", visual: "hedge" },
+  { title: "Travel Booking", text: "Flights with TBO API, caching, ticketing", visual: "travel" },
+  { title: "E-commerce", text: "OpenCart stores, grocery marketplace", visual: "ecommerce" },
+  { title: "MLM Platforms", text: "Genealogy trees, level commissions, e-wallet", visual: "mlm" },
+  { title: "APIs & DevOps", text: "Node / PHP / .NET APIs, Docker, Azure CI/CD", visual: "devops" },
 ];
 
 export const about = {
@@ -218,7 +240,7 @@ export const projects: Project[] = [
     title: "City Bank — Digital Account Opening & e-KYC",
     domain: "Digital banking · onboarding · e-KYC",
     year: "2020 – 2022",
-    visual: "wallet",
+    visual: "kyc",
     featured: true,
     stack: ["React", "Redux-Saga", "JSON-config engine", "ECC + AES", "Go WASM", "Webpack"],
     points: [
@@ -299,7 +321,7 @@ export const projects: Project[] = [
     title: "Zeebu PSP, Backoffice & Settlement",
     domain: "B2B telecom payments",
     year: "2023 – 2026",
-    visual: "remittance",
+    visual: "payment",
     stack: ["React → Next.js", "TypeScript", "Fireblocks", "wagmi v2", "subgraph"],
     points: [
       "Invoice generation and payment, swap-and-pay, settlement hooks (create / accept / reject) and Fireblocks auto-withdrawal; moved chain from BSC to Base.",
@@ -346,7 +368,7 @@ export const projects: Project[] = [
     title: "CAB API — Secure Node.js Service",
     domain: "Back-end API · security",
     year: "2016 – 2020",
-    visual: "engine",
+    visual: "api",
     stack: ["Node.js", "Express", "MSSQL", "JWT"],
     points: [
       "Secure REST API on MSSQL with JWT auth, request validation and a ClearCar adapter for a third-party system.",
@@ -367,7 +389,7 @@ export const projects: Project[] = [
     title: "Rupio Wallet — Recharge, DMT, AEPS & Travel",
     domain: "B2B2C fintech wallet · white-label",
     year: "2017 – 2020",
-    visual: "wallet",
+    visual: "banking",
     stack: ["OpenCart", "JavaScript", "MySQL", "Aadhaar e-KYC", "AEPS"],
     points: [
       "Cache-based JS loading, mobile / DTH recharge, money transfer as a white-label iframe, travel booking and AEPS cash withdrawal.",
@@ -378,7 +400,7 @@ export const projects: Project[] = [
     title: "BFIC / XChangeOn — Trading Wallet & IPO",
     domain: "Fintech platform · payments",
     year: "2021 – 2023",
-    visual: "exchange",
+    visual: "payment",
     stack: ["React", ".NET API", "Stripe", "PayPal", "KYC"],
     points: [
       "Full user flow — registration, KYC, trading wallet and IPO-style token sale.",
@@ -389,7 +411,7 @@ export const projects: Project[] = [
     title: "ECC Encryption npm Package & Form Engine",
     domain: "Custom libraries · reuse",
     year: "2021",
-    visual: "vault",
+    visual: "api",
     stack: ["npm", "ECC", "AES", "TypeScript", "React"],
     points: [
       "ecc-node-package: ECC key exchange + AES payload encryption with checksum and signature, shared by Node.js services and React portals.",
@@ -400,7 +422,7 @@ export const projects: Project[] = [
     title: "Kyabol — Grocery Marketplace",
     domain: "E-commerce · grocery",
     year: "2017 – 2019",
-    visual: "travel",
+    visual: "ecommerce",
     stack: ["OpenCart", "MySQL", "MongoDB"],
     points: ["OpenCart grocery store with MySQL catalogue and a MongoDB lead-capture system."],
   },
@@ -432,7 +454,7 @@ export const caseStudies = [
   {
     title: "Secure a bank's onboarding against tampering",
     where: "City Bank Bangladesh · 2020–22",
-    visual: "vault" as VisualKind,
+    visual: "kyc" as VisualKind,
     problem:
       "Digital account opening with ID OCR, video liveness and huge forms. Bank required encrypted payloads plus replay and MITM protection — in the browser.",
     solution:
@@ -636,7 +658,7 @@ export const edge = [
 ];
 
 export const sections = [
-  { id: "home", label: "Genesis", block: 0 },
+  { id: "home", label: "Home", block: 0 },
   { id: "edge", label: "Why me", block: 1 },
   { id: "about", label: "About", block: 2 },
   { id: "experience", label: "Experience", block: 3 },

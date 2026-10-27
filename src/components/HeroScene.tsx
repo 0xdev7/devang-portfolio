@@ -5,75 +5,174 @@ import { Edges, Float } from "@react-three/drei";
 import { useMemo, useRef } from "react";
 import * as THREE from "three";
 
-const BLOCKS = 9;
-const COLORS = ["#22d3ee", "#8b5cf6", "#34d399", "#f472b6", "#fbbf24"];
+// Everything I've built orbits one core: cards, KYC, coins, blocks, servers, security.
+type Kind = "card" | "id" | "coin" | "block" | "shield" | "server";
 
-function blockPosition(i: number): THREE.Vector3 {
-  const t = i / (BLOCKS - 1);
-  const angle = t * Math.PI * 2.2;
-  return new THREE.Vector3(Math.cos(angle) * 2.5, (t - 0.5) * 5.2, Math.sin(angle) * 2.5);
+const ITEMS: { kind: Kind; color: string; ring: number; phase: number }[] = [
+  { kind: "card", color: "#22d3ee", ring: 0, phase: 0 },
+  { kind: "id", color: "#34d399", ring: 1, phase: 1.2 },
+  { kind: "coin", color: "#fbbf24", ring: 2, phase: 2.3 },
+  { kind: "block", color: "#8b5cf6", ring: 0, phase: 3.3 },
+  { kind: "shield", color: "#fb7185", ring: 1, phase: 4.3 },
+  { kind: "server", color: "#22d3ee", ring: 2, phase: 5.3 },
+  { kind: "card", color: "#f472b6", ring: 1, phase: 2.9 },
+  { kind: "block", color: "#34d399", ring: 2, phase: 0.6 },
+];
+
+const RINGS = [
+  { r: 2.7, tilt: 0.35, speed: 0.22 },
+  { r: 3.3, tilt: -0.55, speed: -0.16 },
+  { r: 2.2, tilt: 1.1, speed: 0.28 },
+];
+
+function orbitPos(ring: number, angle: number, out: THREE.Vector3) {
+  const { r, tilt } = RINGS[ring];
+  out.set(Math.cos(angle) * r, 0, Math.sin(angle) * r);
+  out.applyAxisAngle(new THREE.Vector3(1, 0, 0), tilt);
+  return out;
 }
 
-function Block({ index }: { index: number }) {
-  const ref = useRef<THREE.Mesh>(null);
-  const color = COLORS[index % COLORS.length];
-  const pos = useMemo(() => blockPosition(index), [index]);
+function Shape({ kind, color }: { kind: Kind; color: string }) {
+  const mat = (
+    <meshStandardMaterial color="#0b1020" emissive={color} emissiveIntensity={0.55} metalness={0.6} roughness={0.25} transparent opacity={0.88} />
+  );
+  switch (kind) {
+    case "card":
+      return (
+        <mesh>
+          <boxGeometry args={[1.25, 0.8, 0.05]} />
+          {mat}
+          <Edges color={color} />
+        </mesh>
+      );
+    case "id":
+      return (
+        <group>
+          <mesh>
+            <boxGeometry args={[1.0, 0.66, 0.05]} />
+            {mat}
+            <Edges color={color} />
+          </mesh>
+          <mesh position={[-0.25, 0.02, 0.04]}>
+            <circleGeometry args={[0.16, 24]} />
+            <meshBasicMaterial color={color} />
+          </mesh>
+        </group>
+      );
+    case "coin":
+      return (
+        <mesh rotation={[Math.PI / 2, 0, 0]}>
+          <cylinderGeometry args={[0.45, 0.45, 0.1, 40]} />
+          {mat}
+          <Edges color={color} />
+        </mesh>
+      );
+    case "block":
+      return (
+        <mesh>
+          <boxGeometry args={[0.7, 0.7, 0.7]} />
+          {mat}
+          <Edges color={color} />
+        </mesh>
+      );
+    case "shield":
+      return (
+        <mesh>
+          <octahedronGeometry args={[0.5]} />
+          {mat}
+          <Edges color={color} />
+        </mesh>
+      );
+    case "server":
+      return (
+        <group>
+          {[-0.28, 0, 0.28].map((y) => (
+            <mesh key={y} position={[0, y, 0]}>
+              <boxGeometry args={[0.9, 0.22, 0.5]} />
+              {mat}
+              <Edges color={color} />
+            </mesh>
+          ))}
+        </group>
+      );
+  }
+}
+
+function Orbiter({ index }: { index: number }) {
+  const item = ITEMS[index];
+  const group = useRef<THREE.Group>(null);
+  const packet = useRef<THREE.Mesh>(null);
+  const tmp = useMemo(() => new THREE.Vector3(), []);
   useFrame((state) => {
-    if (!ref.current) return;
     const t = state.clock.elapsedTime;
-    ref.current.rotation.x = t * 0.25 + index;
-    ref.current.rotation.y = t * 0.35 + index * 0.5;
-    const pulse = 0.35 + Math.max(0, Math.sin(t * 1.6 - index * 0.7)) * 0.9;
-    (ref.current.material as THREE.MeshStandardMaterial).emissiveIntensity = pulse;
+    const a = item.phase + t * RINGS[item.ring].speed;
+    orbitPos(item.ring, a, tmp);
+    if (group.current) {
+      group.current.position.copy(tmp);
+      group.current.rotation.y = t * 0.6 + index;
+      group.current.rotation.x = Math.sin(t * 0.5 + index) * 0.4;
+    }
+    // A data packet flows from each item into the core and back.
+    if (packet.current) {
+      const u = (t * 0.35 + index / ITEMS.length) % 1;
+      const k = u < 0.5 ? 1 - u * 2 : (u - 0.5) * 2;
+      packet.current.position.copy(tmp).multiplyScalar(k);
+    }
   });
   return (
-    <group position={pos}>
-      <Float speed={1.4} rotationIntensity={0.2} floatIntensity={0.5}>
-        <mesh ref={ref}>
-          <boxGeometry args={[0.95, 0.95, 0.95]} />
-          <meshStandardMaterial
-            color="#0b1020"
-            emissive={color}
-            emissiveIntensity={0.5}
-            metalness={0.6}
-            roughness={0.25}
-            transparent
-            opacity={0.85}
-          />
-          <Edges color={color} lineWidth={1.5} />
-        </mesh>
-      </Float>
+    <>
+      <group ref={group}>
+        <Float speed={1.4} rotationIntensity={0.2} floatIntensity={0.4}>
+          <Shape kind={item.kind} color={item.color} />
+        </Float>
+      </group>
+      <mesh ref={packet}>
+        <sphereGeometry args={[0.06, 12, 12]} />
+        <meshBasicMaterial color={item.color} />
+      </mesh>
+    </>
+  );
+}
+
+function Core() {
+  const ref = useRef<THREE.Mesh>(null);
+  useFrame((state, dt) => {
+    if (!ref.current) return;
+    ref.current.rotation.y += dt * 0.25;
+    const s = 1 + Math.sin(state.clock.elapsedTime * 1.8) * 0.04;
+    ref.current.scale.setScalar(s);
+  });
+  return (
+    <group>
+      <mesh ref={ref}>
+        <icosahedronGeometry args={[0.95, 1]} />
+        <meshBasicMaterial color="#22d3ee" wireframe transparent opacity={0.55} />
+      </mesh>
+      <mesh>
+        <sphereGeometry args={[0.55, 32, 32]} />
+        <meshStandardMaterial color="#0b1020" emissive="#8b5cf6" emissiveIntensity={0.9} />
+      </mesh>
     </group>
   );
 }
 
-function Links() {
-  const points = useMemo(() => Array.from({ length: BLOCKS }, (_, i) => blockPosition(i)), []);
-  const curve = useMemo(() => new THREE.CatmullRomCurve3(points), [points]);
-  const geometry = useMemo(() => new THREE.TubeGeometry(curve, 200, 0.018, 8, false), [curve]);
-  const packets = useRef<THREE.Group>(null);
-
-  useFrame((state) => {
-    const t = state.clock.elapsedTime;
-    packets.current?.children.forEach((child, i) => {
-      const u = (t * 0.07 + i / 6) % 1;
-      child.position.copy(curve.getPointAt(u));
-    });
-  });
-
+function Rings() {
+  const geoms = useMemo(
+    () =>
+      RINGS.map((_, ring) =>
+        new THREE.BufferGeometry().setFromPoints(
+          Array.from({ length: 128 }, (_, i) => orbitPos(ring, (i / 128) * Math.PI * 2, new THREE.Vector3())),
+        ),
+      ),
+    [],
+  );
   return (
     <>
-      <mesh geometry={geometry}>
-        <meshBasicMaterial color="#3b4a7a" transparent opacity={0.8} />
-      </mesh>
-      <group ref={packets}>
-        {Array.from({ length: 6 }).map((_, i) => (
-          <mesh key={i}>
-            <sphereGeometry args={[0.09, 16, 16]} />
-            <meshBasicMaterial color={i % 2 ? "#34d399" : "#22d3ee"} />
-          </mesh>
-        ))}
-      </group>
+      {geoms.map((g, i) => (
+        <lineLoop key={i} geometry={g}>
+          <lineBasicMaterial color="#3b4a7a" transparent opacity={0.6} />
+        </lineLoop>
+      ))}
     </>
   );
 }
@@ -107,10 +206,10 @@ function Particles() {
 
 function Rig({ children }: { children: React.ReactNode }) {
   const ref = useRef<THREE.Group>(null);
-  useFrame((state, dt) => {
+  useFrame((state) => {
     if (!ref.current) return;
-    ref.current.rotation.y += dt * 0.12;
-    ref.current.rotation.x = THREE.MathUtils.lerp(ref.current.rotation.x, state.pointer.y * 0.25, 0.05);
+    ref.current.rotation.x = THREE.MathUtils.lerp(ref.current.rotation.x, 0.15 + state.pointer.y * 0.25, 0.05);
+    ref.current.rotation.z = THREE.MathUtils.lerp(ref.current.rotation.z, -state.pointer.x * 0.15, 0.05);
     ref.current.position.x = THREE.MathUtils.lerp(ref.current.position.x, 0.9 + state.pointer.x * 0.4, 0.05);
   });
   return <group ref={ref}>{children}</group>;
@@ -123,9 +222,10 @@ export default function HeroScene() {
       <pointLight position={[6, 6, 6]} intensity={60} color="#22d3ee" />
       <pointLight position={[-6, -4, 4]} intensity={50} color="#8b5cf6" />
       <Rig>
-        <Links />
-        {Array.from({ length: BLOCKS }).map((_, i) => (
-          <Block key={i} index={i} />
+        <Core />
+        <Rings />
+        {ITEMS.map((_, i) => (
+          <Orbiter key={i} index={i} />
         ))}
       </Rig>
       <Particles />

@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { useEffect, useMemo, useState } from "react";
 import type { VisualKind } from "@/data/profile";
 
-const C = { cyan: "#22d3ee", violet: "#8b5cf6", emerald: "#34d399", amber: "#fbbf24", rose: "#fb7185", line: "#1d2742", muted: "#8a94b3" };
+const C = { cyan: "#22d3ee", violet: "#8b5cf6", emerald: "#34d399", amber: "#fbbf24", rose: "#fb7185", line: "#1d2742", muted: "#8a94b3", text: "#e6ebff" };
 const loop = { repeat: Infinity, ease: "easeInOut" as const };
 
 /* Deterministic pseudo-random so server and client render the same SVG. */
@@ -477,6 +477,276 @@ function Travel() {
   );
 }
 
+/* Card → gateway → bank, cycling through the gateways I've integrated. */
+function Payment() {
+  const tick = useTick(850);
+  const phase = tick % 4;
+  const gateways = ["Stripe", "PayPal", "PayU", "CCAvenue", "Paystack", "Atom"];
+  const gw = gateways[Math.floor(tick / 4) % gateways.length];
+  const status = ["CARD TAPPED", "AUTHORISING…", "AUTHORISED", "CAPTURED ✓"][phase];
+  const lit = (n: number) => (phase >= n ? C.cyan : C.line);
+  return (
+    <svg viewBox="0 0 200 110" className="h-full w-full">
+      <defs>
+        <linearGradient id="pay-card" x1="0" x2="1" y1="0" y2="1">
+          <stop offset="0" stopColor={C.violet} />
+          <stop offset="1" stopColor={C.cyan} />
+        </linearGradient>
+      </defs>
+      <motion.g animate={{ y: phase === 0 ? [0, -4, 0] : 0 }} transition={{ duration: 0.5 }}>
+        <rect x="8" y="34" width="54" height="34" rx="5" fill="url(#pay-card)" opacity="0.9" />
+        <rect x="14" y="42" width="9" height="7" rx="1.5" fill={C.amber} />
+        <text x="14" y="62" fontSize="5.5" fontFamily="monospace" fill="#05070d">•••• 4242</text>
+      </motion.g>
+      <line x1="62" y1="51" x2="80" y2="51" stroke={lit(1)} strokeWidth="1.5" />
+      <rect x="80" y="38" width="44" height="26" rx="5" fill="#0b1020" stroke={lit(1)} strokeWidth="1.5" />
+      <text x="102" y="49" textAnchor="middle" fontSize="4.5" fontFamily="monospace" fill={C.muted}>GATEWAY</text>
+      <motion.text key={gw} x="102" y="58" textAnchor="middle" fontSize="6.5" fontWeight="700" fill={C.text} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+        {gw}
+      </motion.text>
+      <line x1="124" y1="51" x2="142" y2="51" stroke={lit(2)} strokeWidth="1.5" />
+      <g stroke={lit(2)} strokeWidth="1.5" fill="#0b1020">
+        <path d="M144 44 L168 34 L192 44 Z" />
+        <rect x="146" y="44" width="44" height="22" />
+      </g>
+      {[0, 1, 2, 3].map((i) => (
+        <rect key={i} x={151 + i * 10} y="47" width="4" height="16" fill={lit(2)} />
+      ))}
+      <motion.circle
+        r="3"
+        cy="51"
+        fill={phase === 3 ? C.emerald : C.cyan}
+        animate={{ cx: [62, 144] }}
+        transition={{ duration: 1.7, repeat: Infinity, ease: "linear" }}
+      />
+      <text x="100" y="22" textAnchor="middle" fontSize="9" fontWeight="700" fill={C.text}>₹2,499.00</text>
+      <text x="100" y="88" textAnchor="middle" fontSize="6.5" fontFamily="monospace" fill={phase === 3 ? C.emerald : C.cyan}>
+        {status}
+      </text>
+      <text x="100" y="101" textAnchor="middle" fontSize="4.5" fontFamily="monospace" fill={C.muted}>15+ gateways · 3-D Secure · webhooks · refunds</text>
+    </svg>
+  );
+}
+
+/* ID card scan + face liveness + checks ticking — e-KYC. */
+function Kyc() {
+  const tick = useTick(700);
+  const step = tick % 6;
+  const checks = ["OCR", "Liveness", "AML"];
+  const done = step >= 4;
+  return (
+    <svg viewBox="0 0 200 110" className="h-full w-full">
+      <rect x="10" y="20" width="88" height="58" rx="6" fill="#0b1020" stroke={C.line} strokeWidth="1.5" />
+      <text x="16" y="29" fontSize="4.5" fontFamily="monospace" fill={C.muted}>NATIONAL ID</text>
+      <rect x="16" y="33" width="22" height="28" rx="3" fill="#10172b" />
+      <circle cx="27" cy="43" r="5" fill={C.muted} opacity="0.6" />
+      <path d="M19 59 Q27 49 35 59" fill={C.muted} opacity="0.6" />
+      {[36, 44, 52, 60].map((y, i) => (
+        <rect key={y} x="44" y={y} width={i % 2 ? 34 : 46} height="3.5" rx="1.5" fill={step > i ? C.cyan : C.line} opacity={step > i ? 0.7 : 1} />
+      ))}
+      <motion.rect
+        x="10"
+        width="88"
+        height="2"
+        fill={C.cyan}
+        opacity="0.8"
+        animate={{ y: [20, 76, 20] }}
+        transition={{ duration: 2.4, ...loop }}
+      />
+      <circle cx="148" cy="44" r="22" fill="#0b1020" stroke={C.line} strokeWidth="1.5" />
+      <motion.circle
+        cx="148"
+        cy="44"
+        r="26"
+        fill="none"
+        stroke={done ? C.emerald : C.violet}
+        strokeWidth="2"
+        strokeDasharray="10 7"
+        animate={{ rotate: 360 }}
+        transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
+        style={{ transformOrigin: "148px 44px" }}
+      />
+      <motion.g animate={{ x: [0, 2, -2, 0] }} transition={{ duration: 2.2, ...loop }}>
+        <circle cx="141" cy="40" r="2" fill={C.text} />
+        <circle cx="155" cy="40" r="2" fill={C.text} />
+        <path d="M140 51 Q148 57 156 51" stroke={C.text} strokeWidth="1.5" fill="none" />
+      </motion.g>
+      {checks.map((c, i) => {
+        const ok = step > i + 1;
+        return (
+          <g key={c}>
+            <rect x={14 + i * 30} y="86" width="27" height="12" rx="6" fill={ok ? "rgba(52,211,153,0.15)" : "#10172b"} stroke={ok ? C.emerald : C.line} />
+            <text x={27.5 + i * 30} y="94" textAnchor="middle" fontSize="4.6" fontFamily="monospace" fill={ok ? C.emerald : C.muted}>
+              {ok ? "✓ " : ""}
+              {c}
+            </text>
+          </g>
+        );
+      })}
+      <text x="148" y="94" textAnchor="middle" fontSize="6" fontFamily="monospace" fill={done ? C.emerald : C.muted}>
+        {done ? "KYC VERIFIED" : "VERIFYING…"}
+      </text>
+    </svg>
+  );
+}
+
+/* Digital account opening: steps fill in, account number appears. */
+function Banking() {
+  const tick = useTick(900);
+  const step = tick % 6;
+  const steps = ["Details", "ID", "Selfie", "Account"];
+  const opened = step >= 4;
+  return (
+    <svg viewBox="0 0 200 110" className="h-full w-full">
+      <rect x="20" y="4" width="76" height="102" rx="11" fill="#0b1020" stroke={C.line} strokeWidth="2" />
+      <text x="58" y="18" textAnchor="middle" fontSize="5.5" fontWeight="700" fill={C.text}>Open account</text>
+      {steps.map((s, i) => (
+        <g key={s}>
+          <circle cx={32 + i * 17} cy="28" r="4" fill={step > i ? C.cyan : "#10172b"} stroke={step >= i ? C.cyan : C.line} />
+          <text x={32 + i * 17} y="39" textAnchor="middle" fontSize="3.6" fill={C.muted}>{s}</text>
+        </g>
+      ))}
+      {[0, 1, 2, 3].map((i) => (
+        <g key={i}>
+          <rect x="28" y={46 + i * 13} width="60" height="9" rx="2.5" fill="#10172b" stroke={C.line} />
+          <motion.rect
+            key={`${tick}-${i}`}
+            x="30"
+            y={49 + i * 13}
+            height="3"
+            rx="1.5"
+            fill={C.violet}
+            initial={{ width: 0 }}
+            animate={{ width: step > i ? 30 + ((i * 11) % 20) : 0 }}
+            transition={{ duration: 0.5 }}
+          />
+        </g>
+      ))}
+      <motion.g animate={{ opacity: opened ? 1 : 0.15, scale: opened ? 1 : 0.9 }} style={{ transformOrigin: "150px 55px" }}>
+        <rect x="108" y="30" width="84" height="50" rx="8" fill="rgba(52,211,153,0.08)" stroke={C.emerald} />
+        <text x="150" y="46" textAnchor="middle" fontSize="6" fontFamily="monospace" fill={C.emerald}>✓ ACCOUNT OPENED</text>
+        <text x="150" y="60" textAnchor="middle" fontSize="7" fontWeight="700" fill={C.text}>A/C 1029 •••• 4471</text>
+        <text x="150" y="72" textAnchor="middle" fontSize="4.5" fill={C.muted}>agent · branch · self channels</text>
+      </motion.g>
+      <text x="150" y="98" textAnchor="middle" fontSize="4.5" fontFamily="monospace" fill={C.muted}>rule-driven forms · 6+ bank APIs</text>
+    </svg>
+  );
+}
+
+/* Items dropping into a cart, order moving through statuses. */
+function Ecommerce() {
+  const tick = useTick(1100);
+  const statuses = ["ORDER PLACED", "PACKED", "OUT FOR DELIVERY", "DELIVERED ✓"];
+  const s = tick % statuses.length;
+  const items = [C.emerald, C.amber, C.rose, C.cyan];
+  return (
+    <svg viewBox="0 0 200 110" className="h-full w-full">
+      {items.map((col, i) => (
+        <motion.rect
+          key={i}
+          x={52 + i * 14}
+          width="10"
+          height="10"
+          rx="2.5"
+          fill={col}
+          animate={{ y: [0, 52], opacity: [0, 1, 1, 0] }}
+          transition={{ duration: 1.8, delay: i * 0.45, repeat: Infinity, ease: "easeIn" }}
+        />
+      ))}
+      <path d="M36 50 H46 L56 82 H118 L128 58 H52" fill="none" stroke={C.cyan} strokeWidth="2.5" strokeLinejoin="round" />
+      <circle cx="64" cy="90" r="5" fill="none" stroke={C.cyan} strokeWidth="2" />
+      <circle cx="110" cy="90" r="5" fill="none" stroke={C.cyan} strokeWidth="2" />
+      {statuses.map((t, i) => (
+        <g key={t}>
+          <circle cx="146" cy={22 + i * 20} r="4" fill={i <= s ? C.emerald : "#10172b"} stroke={i <= s ? C.emerald : C.line} />
+          {i < 3 && <line x1="146" x2="146" y1={26 + i * 20} y2={38 + i * 20} stroke={i < s ? C.emerald : C.line} />}
+          <text x="154" y={24 + i * 20} fontSize="4.4" fontFamily="monospace" fill={i <= s ? C.text : C.muted}>{t}</text>
+        </g>
+      ))}
+      <text x="82" y="106" textAnchor="middle" fontSize="4.5" fontFamily="monospace" fill={C.muted}>OpenCart · MySQL · gateways</text>
+    </svg>
+  );
+}
+
+/* Client ⇄ API ⇄ DB with encrypted requests and responses. */
+function Api() {
+  const tick = useTick(1200);
+  const routes = ["POST /v1/transfer", "GET /v1/balance", "POST /v1/kyc", "POST /v1/booking"];
+  const ms = [38, 22, 61, 45][tick % 4];
+  const box = (x: number, label: string, sub: string, col: string) => (
+    <g>
+      <rect x={x - 22} y="36" width="44" height="30" rx="6" fill="#0b1020" stroke={col} strokeWidth="1.5" />
+      <text x={x} y="50" textAnchor="middle" fontSize="6" fontWeight="700" fill={C.text}>{label}</text>
+      <text x={x} y="59" textAnchor="middle" fontSize="4" fontFamily="monospace" fill={C.muted}>{sub}</text>
+    </g>
+  );
+  return (
+    <svg viewBox="0 0 200 110" className="h-full w-full">
+      <line x1="52" x2="78" y1="51" y2="51" stroke={C.line} strokeWidth="1.5" />
+      <line x1="122" x2="148" y1="51" y2="51" stroke={C.line} strokeWidth="1.5" />
+      {box(30, "Client", "React · Next.js", C.cyan)}
+      {box(100, "API", "Node · PHP · .NET", C.violet)}
+      {box(170, "DB", "MSSQL · Mongo · PG", C.emerald)}
+      {[0, 1].map((k) => (
+        <motion.circle key={`rq${k}`} r="2.6" cy="47" fill={C.cyan} animate={{ cx: k ? [122, 148] : [52, 78] }} transition={{ duration: 0.9, delay: k * 0.9, repeat: Infinity, repeatDelay: 0.9, ease: "linear" }} />
+      ))}
+      {[0, 1].map((k) => (
+        <motion.circle key={`rs${k}`} r="2.6" cy="55" fill={C.emerald} animate={{ cx: k ? [78, 52] : [148, 122] }} transition={{ duration: 0.9, delay: 1.8 + k * 0.9, repeat: Infinity, repeatDelay: 0.9, ease: "linear" }} />
+      ))}
+      <motion.text key={tick} x="100" y="24" textAnchor="middle" fontSize="6" fontFamily="monospace" fill={C.cyan} initial={{ opacity: 0, y: 4 }} animate={{ opacity: 1, y: 0 }}>
+        {routes[tick % routes.length]}
+      </motion.text>
+      <text x="100" y="82" textAnchor="middle" fontSize="6" fontFamily="monospace" fill={C.emerald}>200 OK · {ms} ms</text>
+      <text x="100" y="96" textAnchor="middle" fontSize="4.5" fontFamily="monospace" fill={C.muted}>🔒 JWT · AES + RSA · ECC · rate-limited</text>
+    </svg>
+  );
+}
+
+/* CI/CD pipeline lighting up stage by stage, then deploying to the cloud. */
+function Devops() {
+  const tick = useTick(650);
+  const stages = ["Build", "Test", "Docker", "Push", "Deploy"];
+  const s = tick % (stages.length + 2);
+  const live = s >= stages.length;
+  return (
+    <svg viewBox="0 0 200 110" className="h-full w-full">
+      <text x="10" y="18" fontSize="5" fontFamily="monospace" fill={C.muted}>development → main · GitHub Actions</text>
+      {stages.map((st, i) => {
+        const ok = s > i;
+        const run = s === i;
+        return (
+          <g key={st}>
+            {i > 0 && <line x1={i * 30 - 4} x2={i * 30 + 6} y1="44" y2="44" stroke={ok ? C.emerald : C.line} strokeWidth="1.5" />}
+            <motion.circle
+              cx={20 + i * 30}
+              cy="44"
+              r="9"
+              fill={ok ? "rgba(52,211,153,0.15)" : "#0b1020"}
+              stroke={ok ? C.emerald : run ? C.amber : C.line}
+              strokeWidth="1.8"
+              animate={run ? { scale: [1, 1.15, 1] } : { scale: 1 }}
+              transition={{ duration: 0.6, repeat: run ? Infinity : 0 }}
+              style={{ transformOrigin: `${20 + i * 30}px 44px` }}
+            />
+            <text x={20 + i * 30} y="47" textAnchor="middle" fontSize="7" fill={ok ? C.emerald : run ? C.amber : C.muted}>
+              {ok ? "✓" : run ? "•" : ""}
+            </text>
+            <text x={20 + i * 30} y="64" textAnchor="middle" fontSize="4.6" fontFamily="monospace" fill={ok ? C.text : C.muted}>{st}</text>
+          </g>
+        );
+      })}
+      <motion.g animate={{ opacity: live ? 1 : 0.25 }}>
+        <path d="M160 52 a10 10 0 0 1 4 -19 a14 14 0 0 1 26 4 a8 8 0 0 1 0 15 Z" fill="rgba(34,211,238,0.12)" stroke={live ? C.cyan : C.line} strokeWidth="1.5" />
+        <text x="176" y="47" textAnchor="middle" fontSize="5" fontFamily="monospace" fill={live ? C.cyan : C.muted}>Azure</text>
+      </motion.g>
+      <text x="100" y="86" textAnchor="middle" fontSize="6" fontFamily="monospace" fill={live ? C.emerald : C.amber}>
+        {live ? "✓ LIVE · Container Apps / Web Apps" : `RUNNING · ${stages[Math.min(s, 4)]}`}
+      </text>
+      <text x="100" y="99" textAnchor="middle" fontSize="4.5" fontFamily="monospace" fill={C.muted}>Docker → ACR → UAT → prod</text>
+    </svg>
+  );
+}
+
 export function ProjectVisual({ kind }: { kind: VisualKind }) {
   switch (kind) {
     case "wallet":
@@ -505,6 +775,18 @@ export function ProjectVisual({ kind }: { kind: VisualKind }) {
       return <Vault />;
     case "travel":
       return <Travel />;
+    case "payment":
+      return <Payment />;
+    case "kyc":
+      return <Kyc />;
+    case "banking":
+      return <Banking />;
+    case "ecommerce":
+      return <Ecommerce />;
+    case "api":
+      return <Api />;
+    case "devops":
+      return <Devops />;
   }
 }
 

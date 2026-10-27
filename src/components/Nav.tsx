@@ -33,7 +33,7 @@ export function Nav() {
       <nav className="mx-3 mt-3 flex max-w-6xl md:mx-auto items-center justify-between gap-4 rounded-2xl px-4 py-2.5 glass">
         <a href="#home" className="flex items-center gap-2 font-mono text-sm font-semibold">
           <span className="grid h-8 w-8 place-items-center rounded-lg bg-gradient-to-br from-cyan to-violet text-ink">DP</span>
-          <span className="hidden text-muted sm:inline lg:hidden xl:inline">devang.eth</span>
+          <span className="hidden text-muted sm:inline lg:hidden xl:inline">devang.dev</span>
         </a>
 
         <ol className="hidden items-center lg:flex">

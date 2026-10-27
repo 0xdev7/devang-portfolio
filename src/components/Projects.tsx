@@ -37,7 +37,7 @@ function Card({ p, i, hideOnMobile, onOpen }: { p: Project; i: number; hideOnMob
       <div className="relative h-44 border-b border-line bg-panel/60 p-4 sm:h-52">
         <ProjectVisual kind={p.visual} />
         <span className="absolute right-3 top-3 rounded-md border border-line bg-ink/80 px-2 py-0.5 font-mono text-[10px] text-muted">
-          tx #{String(i + 1).padStart(2, "0")}
+          #{String(i + 1).padStart(2, "0")}
         </span>
       </div>
       <div className="flex flex-1 flex-col p-5">
@@ -127,10 +127,10 @@ export function Projects() {
     <section id="projects" className="relative mx-auto max-w-6xl scroll-mt-24 px-5 py-16 md:py-24">
       <BlockHeader
         block={5}
-        kicker="// projects.ledger"
+        kicker="// projects.shipped"
         title={
           <>
-            {projects.length} builds, 2012 → 2026, <span className="text-gradient">each one a confirmed block.</span>
+            {projects.length} builds, 2012 → 2026, <span className="text-gradient">banking to blockchain.</span>
           </>
         }
       />

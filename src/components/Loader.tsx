@@ -3,7 +3,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
 
-const steps = ["Connecting to peers", "Syncing blocks", "Verifying signatures", "Loading ledger"];
+const steps = ["Verifying identity (KYC)", "Authorising payment", "Settling transfer", "Confirming on-chain", "Deploying portfolio"];
 
 export function Loader() {
   const [pct, setPct] = useState(0);
@@ -29,7 +29,7 @@ export function Loader() {
     if (done) document.documentElement.style.overflow = "";
   }, [done]);
 
-  const step = steps[Math.min(steps.length - 1, Math.floor(pct / 26))];
+  const step = steps[Math.min(steps.length - 1, Math.floor(pct / 20))];
   const blocks = 12;
   const filled = Math.round((pct / 100) * blocks);
 
@@ -41,7 +41,7 @@ export function Loader() {
           exit={{ opacity: 0, filter: "blur(8px)" }}
           transition={{ duration: 0.6 }}
         >
-          <div className="mb-8 font-mono text-xs tracking-[0.3em] text-muted">NODE · DEVANG.PAREKH</div>
+          <div className="mb-8 font-mono text-xs tracking-[0.3em] text-muted">DEVANG.PAREKH · FINTECH SYSTEMS</div>
           <div className="flex gap-1.5">
             {Array.from({ length: blocks }).map((_, i) => (
               <motion.div
@@ -61,13 +61,13 @@ export function Loader() {
             <span className="text-cyan">{pct}%</span>
           </div>
           <div className="mt-2 font-mono text-[11px] text-muted/60">
-            block #{(18_204_311 + pct * 7).toLocaleString("en-US")} · {filled}/{blocks} confirmations
+            TXN-{(18_204_311 + pct * 7).toString(16).toUpperCase()} · {filled}/{blocks} checks passed
           </div>
           <button
             onClick={() => setDone(true)}
             className="mt-10 rounded-full border border-line px-4 py-1.5 font-mono text-xs text-muted transition hover:border-cyan hover:text-cyan"
           >
-            Skip sync →
+            Skip →
           </button>
         </motion.div>
       )}
