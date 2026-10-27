@@ -607,7 +607,7 @@ export const skills = [
 
 export const aiWorkflow = {
   intro:
-    "I ship production systems with an agentic AI workflow — Claude Code for architecture, implementation, debugging, review and ops tooling, GitHub Copilot in the editor. Every change is human-reviewed, tested and rolled out under control.",
+    "I ship production systems with a spec-driven AI workflow: every feature starts as a written spec, becomes a step-by-step plan, and is then implemented by Claude Code agents — while I own the design, review every change, and test before release. The filler service and the hedge module were both built this way.",
   numbers: [
     { value: "2,000+", label: "AI-assisted commits" },
     { value: "150+", label: "Claude Code sessions" },
@@ -619,6 +619,42 @@ export const aiWorkflow = {
     { title: "Plan", text: "Specs turn into implementation plans split into named, resumable agent sessions with per-repo memory." },
     { title: "Implement", text: "Specialised subagents — explorer, architect, reviewer — work in parallel git worktrees." },
     { title: "Review", text: "Model treated as a fast junior: human review, tests and staged rollout before anything ships." },
+  ],
+  // Real spec → plan → implement runs, counted from each repo's docs/superpowers folder.
+  specProjects: [
+    {
+      name: "Filler Service",
+      what: "UniswapX + 1inch Fusion filler with hedging and risk gates",
+      specs: 7,
+      plans: 7,
+      features: [
+        "Exclusive intent fill bridge",
+        "OIDC → AWS KMS signing auth",
+        "Unified filler config + cutover",
+        "Hedge placement redesign",
+        "Hedge balance gate",
+        "OKX volatility gate",
+        "UniswapX volatility halt",
+      ],
+    },
+    {
+      name: "Hedge Module",
+      what: "PERP & X-PERP hedging service with exposure caps",
+      specs: 10,
+      plans: 6,
+      features: [
+        "Hedge module design",
+        "ETH-BTC cross legs",
+        "Redis write-behind",
+        "Perp netting",
+        "X-PERP route",
+        "Manual bracket override",
+        "Venue-sourced PnL",
+        "Base caps + filler gate",
+        "Perp route per base & side",
+        "Zone markup",
+      ],
+    },
   ],
 };
 

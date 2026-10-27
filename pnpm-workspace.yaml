@@ -2,3 +2,7 @@ allowBuilds:
   unrs-resolver: true
   sharp: true
   "@tailwindcss/oxide": true
+
+# Security: patched postcss for advisories GHSA-qx2v-qp2m-jg93, GHSA-fxqj-rqcc-2cmp and the two high-severity source-map ones.
+overrides:
+  postcss: ">=8.5.23"
