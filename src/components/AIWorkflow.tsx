@@ -10,8 +10,8 @@ const icons = [FileText, GitBranch, Bot, ShieldCheck];
 
 const terminal = [
   { c: "text-muted", t: "$ claude --resume hedge-mapping-3-venue" },
-  { c: "text-violet", t: "● spec       docs/superpowers/specs/xperp-route-design.md" },
-  { c: "text-cyan", t: "● plan       docs/superpowers/plans/xperp-route.md · 9 tasks" },
+  { c: "text-violet", t: "● spec       docs/superpowers/specs/dated-futures-route-design.md" },
+  { c: "text-cyan", t: "● plan       docs/superpowers/plans/dated-futures-route.md · 9 tasks" },
   { c: "text-amber", t: "● implement  worktree feat/exposure-caps (3 agents)" },
   { c: "text-emerald", t: "✓ tests      1,900+ passed · 0 failed" },
   { c: "text-emerald", t: "✓ review     human-approved · staged rollout" },
@@ -29,7 +29,7 @@ function Terminal() {
         <span className="h-2.5 w-2.5 rounded-full bg-rose/70" />
         <span className="h-2.5 w-2.5 rounded-full bg-amber/70" />
         <span className="h-2.5 w-2.5 rounded-full bg-emerald/70" />
-        <span className="ml-3 font-mono text-[11px] text-muted">claude-code · orbt-hedge</span>
+        <span className="ml-3 font-mono text-[11px] text-muted">claude-code · hedging-engine</span>
       </div>
       <div className="min-h-[200px] space-y-1.5 p-5 font-mono text-[12.5px]">
         {terminal.slice(0, n).map((l, i) => (

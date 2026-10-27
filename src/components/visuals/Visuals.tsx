@@ -394,7 +394,7 @@ function Vault() {
         animate={{ y: [90, 40, 90], height: [4, 54, 4] }}
         transition={{ duration: 5, ...loop }}
       />
-      <text x="100" y="58" textAnchor="middle" fontSize="8" fontFamily="monospace" fill="#e6ebff">sZeroX</text>
+      <text x="100" y="58" textAnchor="middle" fontSize="8" fontFamily="monospace" fill="#e6ebff">sVault</text>
       {[0, 1, 2].map((i) => (
         <motion.circle
           key={i}

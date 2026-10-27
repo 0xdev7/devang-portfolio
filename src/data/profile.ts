@@ -169,12 +169,12 @@ export const experience: Job[] = [
     company: "Bankai Infotech (Panamax Infotech · Bankai Group)",
     place: "Ahmedabad",
     period: "2023 — Present",
-    tags: ["Zeebu", "ORBT", "DeFi", "Trading", "Team lead"],
+    tags: ["Zeebu", "Intent-based DeFi", "Trading", "Team lead"],
     points: [
-      "Lead a 6-engineer front-end team for Zeebu (telecom settlement & loyalty) and ORBT (intent-based DeFi) — architecture, sprint planning, code review, hiring, mentoring and 100+ production releases.",
+      "Lead a 6-engineer front-end team for Zeebu (telecom settlement & loyalty) and an intent-based DeFi protocol — architecture, sprint planning, code review, hiring, mentoring and 100+ production releases.",
       "Moved Zeebu from Web2 to Web3 in three steps — MetaMask + ethers.js → wagmi with a custom wallet connector → Reown AppKit — with staking, withdraw, bonus, referral commission and wallet-signature registration.",
-      "Integrated Money Market (Aave-style) and ORBT contracts — supply / borrow / repay, ERC-4626 savings vaults, Safe multisig flows — with Multicall batching and subgraph data.",
-      "Built the DeFi trading stack: UniswapX / 1inch Fusion filler, OKX and CoW solvers, keeper and rebalancer, a treasury dashboard (980 commits) and a PERP / X-PERP hedge module — the Rust services built with Claude Code (AI), which I specified, reviewed and tested.",
+      "Integrated money-market (Aave-style) and protocol contracts — supply / borrow / repay, ERC-4626 savings vaults, Safe multisig flows — with Multicall batching and subgraph data.",
+      "Built intent-settlement infrastructure: a UniswapX filler and 1inch Fusion resolver, OKX and CoW Protocol solvers, keeper and rebalancer bots, a treasury dashboard (980 commits) and a delta-neutral hedging engine for perps and dated futures — the Rust services built with Claude Code (AI), which I specified, reviewed and tested.",
       "Build and ship every service myself: Docker images to Azure Container Registry, GitHub Actions CI/CD with UAT → prod promotion, deploys to Azure Container Apps and Web Apps; Azure → AWS KMS federation for signing.",
       "Owned security: OAK Security audit remediation, encrypted payloads, nonce / replay and MITM protection, throttling, CSP — 20+ findings fixed.",
     ],
@@ -275,7 +275,7 @@ export const projects: Project[] = [
     ],
   },
   {
-    title: "ORBT Finance Center — Treasury & Trading Ops",
+    title: "Multi-Chain Treasury & Trading-Ops Dashboard",
     domain: "DeFi treasury · data-heavy ops UI · AI-built",
     year: "2026",
     visual: "dashboard",
@@ -283,13 +283,13 @@ export const projects: Project[] = [
     stack: ["Next.js 14", "tRPC v11", "Drizzle", "PostgreSQL", "BullMQ (AI-written)", "Redis", "Safe SDK", "AWS KMS", "Docker", "Azure Container Apps", "Claude Code"],
     points: [
       "Lead author (980 commits): 3-of-5 Gnosis Safe across 5 EVM chains with propose → sign → execute flows, delegates, whitelisting and signed-message login.",
-      "Treasury, money-market, executor, filler, maker, pocket and OKX views — PnL, solvency, reconciliation, rebalancing and alerts.",
+      "Treasury, money-market, settlement-executor, filler, market-maker, hot-wallet and CEX views — PnL, solvency, reconciliation, rebalancing and alerts.",
       "3-tier data fallback (Postgres views → admin proxy → live stats) so pages stay up when a source fails; virtualised tables with CSV / XLSX export.",
     ],
   },
   {
-    title: "Hedge Module — PERP & X-PERP",
-    domain: "Trading · risk · hedging · AI-built",
+    title: "Delta-Neutral Hedging Engine — Perps & Dated Futures",
+    domain: "CEX hedging · risk management · AI-built",
     year: "2026",
     visual: "hedge",
     featured: true,
@@ -301,30 +301,30 @@ export const projects: Project[] = [
     ],
   },
   {
-    title: "DeFi Trading Stack — UniswapX, 1inch Fusion, CoW & OKX",
-    domain: "Intents · fillers · solvers · MEV",
+    title: "Intent Settlement — Fillers, Resolvers & Solvers",
+    domain: "UniswapX · 1inch Fusion · CoW Protocol · OKX DEX · MEV",
     year: "2026",
     visual: "intent",
     featured: true,
     stack: ["TypeScript", "Node.js", "ethers v6", "PostgreSQL", "AWS KMS", "Docker", "Azure Container Apps", "Claude Code (AI)"],
     points: [
-      "Filler service (335 commits): inventory-backed UniswapX Dutch-order and 1inch Fusion filler — pre-fill simulation, multi-venue quoting off the OKX book, post-fill hedging, per-venue gas-tier ladders, exclusive-window re-simulate / replace and MEV-aware submit lanes.",
+      "Filler / resolver service (335 commits): inventory-backed UniswapX Dutch-order filler and 1inch Fusion resolver — pre-fill simulation, multi-venue quoting off the OKX book, post-fill hedging, per-venue gas-tier ladders, exclusive-window re-simulate / replace and MEV-aware submit lanes.",
       "Risk controls: fleet-wide $500k open-volume cap measured off the live OKX book, volatility gate, quote pause across the fleet, per-pair markup and buy / sell switches from a live config console.",
-      "OKX intent solver (137 commits, Rust written with Claude Code): /quote → /solve → /settle with EIP-712 signing and KMS broadcast, OKX spot + perp hedging; Multicall batching cut RPC load ~138k → ~49k calls / day.",
+      "OKX DEX intent solver (137 commits, Rust written with Claude Code): /quote → /solve → /settle with EIP-712 signing and KMS broadcast, OKX spot + perp hedging; Multicall batching cut RPC load ~138k → ~49k calls / day.",
       "CoW Protocol solver (AI-written Rust, my config and testing): dry-run master switch, Redis-down salvage of financial writes, JIT ERC-1271 settlement from executor inventory.",
       "Each service shipped as a Docker image through GitHub Actions to Azure Container Apps, with per-venue dry-run and UAT / pre-prod / prod pipelines.",
-      "Ops around it: keeper bot with Multicall3 reconcile and per-venue hedge registry, cross-chain rebalancer with Azure → AWS KMS signing, and a solver-stats dashboard with 3-tier fallback.",
+      "Ops around it: keeper bot with Multicall3 reconcile and per-venue hedge registry, cross-chain inventory rebalancer with Azure → AWS KMS signing, and a solver analytics dashboard with 3-tier fallback.",
     ],
   },
   {
-    title: "Money Market & ORBT dApp — Contract Integrations",
+    title: "Money Market & DeFi Savings dApp — Contract Integrations",
     domain: "Lending · savings vaults · Safe App",
     year: "2024 – 2026",
     visual: "lending",
     stack: ["Next.js 13–16", "React 19", "wagmi", "viem", "Safe Apps SDK", "MUI", "Jest", "Cypress"],
     points: [
       "Aave-style money market: supply / borrow / repay / withdraw, health factor, reserve analytics; swap & bridge via KyberSwap, Paraswap and Wormhole; Transak on-ramp.",
-      "ORBT savings, swap, portfolio and transparency pages; ERC-4626 vaults; runs as a Safe App with EIP-1271 signature checks.",
+      "Savings, swap, portfolio and proof-of-reserves pages; ERC-4626 vaults; runs as a Safe App with EIP-1271 signature checks.",
       "Multicall batching, subgraph charts (TVL / APY), 80%+ Jest coverage and Cypress E2E.",
     ],
   },
@@ -486,7 +486,7 @@ export const caseStudies = [
   },
   {
     title: "Cut RPC load on dashboards and bots",
-    where: "ORBT · 2024–26",
+    where: "Intent-based DeFi protocol · 2024–26",
     visual: "dashboard" as VisualKind,
     problem:
       "Pages and services read hundreds of contract values one by one — slow and hitting provider rate limits.",
@@ -497,7 +497,7 @@ export const caseStudies = [
   },
   {
     title: "Hedge on-chain trades safely on a CEX",
-    where: "ORBT Hedge Module · 2026",
+    where: "Delta-neutral hedging engine · 2026",
     visual: "hedge" as VisualKind,
     problem:
       "Filled trades leave price risk that must be hedged instantly on OKX spot, perps and futures — no double orders, hard stop on failure.",
@@ -546,7 +546,7 @@ export const faq = [
   },
   {
     q: "How do you use AI?",
-    a: "Daily with Claude Code: spec → plan → implement → review. The Finance Center and the hedge module were built this way — the AI writes code (including Rust, which I don't write by hand), and I own the spec, review and testing.",
+    a: "Daily with Claude Code: spec → plan → implement → review. The treasury dashboard and the hedging engine were built this way — the AI writes code (including Rust, which I don't write by hand), and I own the spec, review and testing.",
   },
   {
     q: "Notice period and location?",
@@ -607,7 +607,7 @@ export const skills = [
 
 export const aiWorkflow = {
   intro:
-    "I ship production systems with a spec-driven AI workflow: every feature starts as a written spec, becomes a step-by-step plan, and is then implemented by Claude Code agents — while I own the design, review every change, and test before release. The filler service and the hedge module were both built this way.",
+    "I ship production systems with a spec-driven AI workflow: every feature starts as a written spec, becomes a step-by-step plan, and is then implemented by Claude Code agents — while I own the design, review every change, and test before release. The intent filler and the hedging engine were both built this way.",
   numbers: [
     { value: "2,000+", label: "AI-assisted commits" },
     { value: "150+", label: "Claude Code sessions" },
@@ -623,8 +623,8 @@ export const aiWorkflow = {
   // Real spec → plan → implement runs, counted from each repo's docs/superpowers folder.
   specProjects: [
     {
-      name: "Filler Service",
-      what: "UniswapX + 1inch Fusion filler with hedging and risk gates",
+      name: "Intent Filler & Resolver",
+      what: "UniswapX filler + 1inch Fusion resolver with hedging and risk gates",
       specs: 7,
       plans: 7,
       features: [
@@ -638,16 +638,16 @@ export const aiWorkflow = {
       ],
     },
     {
-      name: "Hedge Module",
-      what: "PERP & X-PERP hedging service with exposure caps",
+      name: "Delta-Neutral Hedging Engine",
+      what: "Perp & dated-futures hedging with exposure caps",
       specs: 10,
       plans: 6,
       features: [
-        "Hedge module design",
+        "Hedging engine design",
         "ETH-BTC cross legs",
         "Redis write-behind",
         "Perp netting",
-        "X-PERP route",
+        "Dated-futures route",
         "Manual bracket override",
         "Venue-sourced PnL",
         "Base caps + filler gate",
