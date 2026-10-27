@@ -103,7 +103,7 @@ export function About() {
   return (
     <section id="about" className="relative mx-auto max-w-6xl scroll-mt-24 px-5 py-16 md:py-24">
       <BlockHeader
-        block={2}
+        block={3}
         kicker="// about.me"
         title={
           <>

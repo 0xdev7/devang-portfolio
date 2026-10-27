@@ -4,7 +4,6 @@ import { Cases } from "@/components/Cases";
 import { Contact } from "@/components/Contact";
 import { Edge } from "@/components/Edge";
 import { Experience } from "@/components/Experience";
-import { Flow } from "@/components/Flow";
 import { Hero } from "@/components/Hero";
 import { Loader } from "@/components/Loader";
 import { Nav } from "@/components/Nav";
@@ -26,13 +25,12 @@ export default function Home() {
         <Hero />
         <Ticker />
         <Stats />
-        <Flow />
+        <Skills />
         <Edge />
         <About />
         <Experience />
         <Cases />
         <Projects />
-        <Skills />
         <AIWorkflow />
         <Contact />
       </main>

@@ -206,7 +206,7 @@ export function Hero() {
         </motion.div>
       </div>
 
-      <a href="#about" className="absolute bottom-6 left-1/2 hidden md:flex -translate-x-1/2 flex-col items-center gap-1 font-mono text-[11px] text-muted">
+      <a href="#skills" className="absolute bottom-6 left-1/2 hidden md:flex -translate-x-1/2 flex-col items-center gap-1 font-mono text-[11px] text-muted">
         scroll to explore
         <motion.span animate={{ y: [0, 6, 0] }} transition={{ repeat: Infinity, duration: 1.6 }}>
           <ArrowDown className="h-4 w-4" />

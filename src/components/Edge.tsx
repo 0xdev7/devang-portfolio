@@ -13,7 +13,7 @@ export function Edge() {
   return (
     <section id="edge" className="relative mx-auto max-w-6xl scroll-mt-24 px-5 py-16 md:py-24">
       <BlockHeader
-        block={1}
+        block={2}
         kicker="// why.me"
         title={
           <>

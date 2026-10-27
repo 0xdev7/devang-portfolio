@@ -93,18 +93,6 @@ export const domainShowcase: { title: string; text: string; visual: VisualKind }
   { title: "APIs & DevOps", text: "Node / PHP / .NET APIs, Docker, Azure CI/CD", visual: "devops" },
 ];
 
-// A customer's journey through the systems I've built, start to finish.
-export const flowStages: { title: string; text: string; visual: VisualKind; tags: string[] }[] = [
-  { title: "Onboard · e-KYC", text: "ID card OCR, video liveness and AML checks before an account exists — City Bank, Zeebu KYC / KYB, Aadhaar e-KYC.", visual: "kyc", tags: ["Sumsub", "Jumio", "Aadhaar", "NID OCR", "Liveness"] },
-  { title: "Open account", text: "Rule-driven onboarding across agent, branch and self channels; one submit fans out to 6+ bank APIs.", visual: "banking", tags: ["React", "Redux-Saga", "JSON config", "Bank APIs"] },
-  { title: "Pay", text: "Card, UPI and net-banking through 15+ gateways — authorise, capture, refund, webhooks and 3-D Secure.", visual: "payment", tags: ["Stripe", "PayPal", "PayU", "CCAvenue", "Paystack"] },
-  { title: "Wallet", text: "35+ wallet services per role — P2P, cash-in / out, bills, airtime, QR pay — in English, Arabic and Kurdish.", visual: "wallet", tags: ["NassWallet", "QCell", "Rupio", "RTL"] },
-  { title: "Transfer", text: "Domestic money transfer (IMPS / NEFT), AEPS and cross-border remittance with AES + RSA encrypted calls.", visual: "remittance", tags: ["ICICI", "RBL", "AU", "AES + RSA"] },
-  { title: "Trade", text: "Crypto exchanges with live order books over WebSocket / SignalR — Ohocash, Paro and a white-label for 8+ brands.", visual: "exchange", tags: ["React", ".NET", "SignalR", "TradingView"] },
-  { title: "On-chain", text: "Web2 → Web3: wallet sign-in, staking, money market, Safe multisig and savings vaults.", visual: "intent", tags: ["wagmi", "viem", "ethers", "Safe SDK"] },
-  { title: "Ship", text: "Docker images through GitHub Actions to Azure Container Apps and Web Apps, UAT → prod.", visual: "devops", tags: ["Docker", "GitHub Actions", "Azure"] },
-];
-
 export const about = {
   summary:
     "Front-End Team Lead who also works full-stack. I started in PHP (CodeIgniter, OpenCart), grew through AngularJS and React, and today build with Next.js, Node.js and TypeScript on MSSQL, MySQL, MongoDB and PostgreSQL. My strongest areas are payments and KYC integrations, API security, performance tuning and implementing reusable component libraries — and I lead the team that ships them.",
@@ -554,60 +542,73 @@ export const faq = [
   },
 ];
 
+// Main areas first: the first three render as the large "core" cards.
 export const skills = [
   {
     group: "Front-End",
+    icon: "code",
     items: ["React 16–19", "Next.js 13–16", "TypeScript", "JavaScript ES2022", "AngularJS 1.x", "jQuery", "HTML5", "CSS3", "Tailwind", "MUI", "Chakra", "shadcn", "PWA", "i18n + RTL", "Design systems"],
   },
   {
     group: "Back-End",
+    icon: "server",
     items: ["Node.js", "Express", "tRPC", "REST", "GraphQL / Apollo", "BFF / adapter layers", "cron jobs", "PHP (CodeIgniter 2–4)", "OpenCart", ".NET WebAPI"],
   },
   {
     group: "Databases",
+    icon: "database",
     items: ["MSSQL / Azure SQL", "MySQL (triggers, stored procs)", "MongoDB / Mongoose", "PostgreSQL", "Redis", "Cosmos DB", "AWS Aurora", "Drizzle", "Prisma", "Schema design & migrations"],
   },
   {
-    group: "KYC & Identity",
-    items: ["Sumsub", "Jumio", "Trulioo", "Aadhaar e-KYC", "NID OCR", "Video liveness", "KYC / KYB flows", "Chainalysis", "2FA / OTP", "Transaction PIN", "Device registration"],
-  },
-  {
-    group: "Payments & 3rd Party",
-    items: ["Stripe", "PayPal", "Paystack", "CCAvenue", "PayU", "Atom", "Mollie", "CoinGate", "Banxa", "Transak", "ICICI / RBL IMPS", "BitGo", "Fireblocks", "Safe", "Binance / OKX APIs", "TBO travel"],
-  },
-  {
-    group: "Optimisation",
-    items: ["Webpack 4 / 5 splitChunks", "Tree-shaking & compression", "Code splitting", "React.lazy / react-loadable", "Memoisation", "Virtualised tables", "Redis / result caching", "Multicall batching", "WebAssembly (Go / TinyGo)"],
-  },
-  {
-    group: "Libraries Implemented",
-    items: ["ECC encryption npm package", "35-control form engine", "Jbs* React component kit", "JSON menu & permissions", "Custom wagmi connector", "Shared filter / report kit", "Tailwind token system"],
-  },
-  {
-    group: "Security",
-    items: ["ECC / AES-256 / RSA", "HMAC-SHA512", "Nonce / replay protection", "MITM protection", "Throttling & rate limits", "CSP", "RBAC", "Signed-message login", "AWS KMS", "Audit remediation"],
-  },
-  {
-    group: "Web3 & Trading",
-    items: ["wagmi v2", "viem", "ethers", "Reown AppKit", "RainbowKit", "WalletConnect", "Safe SDK", "Solidity", "Foundry", "ERC-20 / 721 / 4626", "EIP-712 / 1271", "The Graph", "DEX / intent API integration"],
-  },
-  {
     group: "DevOps & Cloud",
+    icon: "cloud",
     items: ["Docker (multi-stage builds)", "GitHub Actions CI/CD", "Azure Web Apps (App Service)", "Azure Container Apps", "Azure Container Registry", "Azure Front Door", "Azure Key Vault", "Azure → AWS KMS federation", "AWS S3", "UAT → prod promotion", "IIS (.NET)", "Linux servers", "Sentry", "Grafana"],
   },
   {
+    group: "Security",
+    icon: "shield",
+    items: ["ECC / AES-256 / RSA", "HMAC-SHA512", "Nonce / replay protection", "MITM protection", "Throttling & rate limits", "CSP", "RBAC", "Signed-message login", "AWS KMS", "Audit remediation"],
+  },
+  {
+    group: "Payments & 3rd Party",
+    icon: "card",
+    items: ["Stripe", "PayPal", "Paystack", "CCAvenue", "PayU", "Atom", "Mollie", "CoinGate", "Banxa", "Transak", "ICICI / RBL IMPS", "BitGo", "Fireblocks", "Safe", "Binance / OKX APIs", "TBO travel"],
+  },
+  {
+    group: "KYC & Identity",
+    icon: "kyc",
+    items: ["Sumsub", "Jumio", "Trulioo", "Aadhaar e-KYC", "NID OCR", "Video liveness", "KYC / KYB flows", "Chainalysis", "2FA / OTP", "Transaction PIN", "Device registration"],
+  },
+  {
+    group: "Web3 & Trading",
+    icon: "web3",
+    items: ["wagmi v2", "viem", "ethers", "Reown AppKit", "RainbowKit", "WalletConnect", "Safe SDK", "Solidity", "Foundry", "ERC-20 / 721 / 4626", "EIP-712 / 1271", "The Graph", "DEX / intent API integration"],
+  },
+  {
+    group: "Optimisation",
+    icon: "gauge",
+    items: ["Webpack 4 / 5 splitChunks", "Tree-shaking & compression", "Code splitting", "React.lazy / react-loadable", "Memoisation", "Virtualised tables", "Redis / result caching", "Multicall batching", "WebAssembly (Go / TinyGo)"],
+  },
+  {
     group: "Testing & Quality",
+    icon: "test",
     items: ["Jest", "React Testing Library", "Cypress", "Vitest", "80%+ coverage", "Fork / dry-run testing", "Code review", "ESLint / Prettier"],
   },
   {
     group: "Leadership",
+    icon: "team",
     items: ["Team lead (6 engineers)", "People manager", "Agile / Scrum", "Code review", "Hiring", "Mentoring", "Tech docs & handover", "Stakeholder comms", "Release management", "L3 support"],
+  },
+  {
+    group: "Libraries Implemented",
+    icon: "package",
+    items: ["ECC encryption npm package", "35-control form engine", "Jbs* React component kit", "JSON menu & permissions", "Custom wagmi connector", "Shared filter / report kit", "Tailwind token system"],
   },
 ];
 
 export const aiWorkflow = {
   intro:
-    "I ship production systems with a spec-driven AI workflow: every feature starts as a written spec, becomes a step-by-step plan, and is then implemented by Claude Code agents — while I own the design, review every change, and test before release. The intent filler and the hedging engine were both built this way.",
+    "I ship production systems with a spec-driven AI workflow: every feature starts as a written spec, becomes a step-by-step plan, and is then implemented by Claude Code agents — while I own the design, review every change, and test before release. The intent-based settlement system and the hedging engine were both built this way.",
   numbers: [
     { value: "2,000+", label: "AI-assisted commits" },
     { value: "150+", label: "Claude Code sessions" },
@@ -623,18 +624,18 @@ export const aiWorkflow = {
   // Real spec → plan → implement runs, counted from each repo's docs/superpowers folder.
   specProjects: [
     {
-      name: "Intent Filler & Resolver",
-      what: "UniswapX filler + 1inch Fusion resolver with hedging and risk gates",
+      name: "Intent-Based Settlement System",
+      what: "Intent order execution with pre-trade simulation, hedging and risk gates",
       specs: 7,
       plans: 7,
       features: [
-        "Exclusive intent fill bridge",
+        "Exclusive-window intent bridge",
         "OIDC → AWS KMS signing auth",
-        "Unified filler config + cutover",
+        "Unified execution config + cutover",
         "Hedge placement redesign",
         "Hedge balance gate",
-        "OKX volatility gate",
-        "UniswapX volatility halt",
+        "Venue volatility gate",
+        "Intent-order volatility halt",
       ],
     },
     {
@@ -650,7 +651,7 @@ export const aiWorkflow = {
         "Dated-futures route",
         "Manual bracket override",
         "Venue-sourced PnL",
-        "Base caps + filler gate",
+        "Base caps + execution gate",
         "Perp route per base & side",
         "Zone markup",
       ],
@@ -712,12 +713,12 @@ export const edge = [
 
 export const sections = [
   { id: "home", label: "Home", block: 0 },
-  { id: "edge", label: "Why me", block: 1 },
-  { id: "about", label: "About", block: 2 },
-  { id: "experience", label: "Experience", block: 3 },
-  { id: "cases", label: "Cases", block: 4 },
-  { id: "projects", label: "Projects", block: 5 },
-  { id: "skills", label: "Skills", block: 6 },
+  { id: "skills", label: "Skills", block: 1 },
+  { id: "edge", label: "Why me", block: 2 },
+  { id: "about", label: "About", block: 3 },
+  { id: "experience", label: "Experience", block: 4 },
+  { id: "cases", label: "Cases", block: 5 },
+  { id: "projects", label: "Projects", block: 6 },
   { id: "ai", label: "AI", block: 7 },
   { id: "contact", label: "Contact", block: 8 },
 ] as const;
