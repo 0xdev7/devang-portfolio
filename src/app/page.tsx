@@ -1,8 +1,6 @@
-import { About } from "@/components/About";
 import { AIWorkflow } from "@/components/AIWorkflow";
 import { Cases } from "@/components/Cases";
 import { Contact } from "@/components/Contact";
-import { Edge } from "@/components/Edge";
 import { Experience } from "@/components/Experience";
 import { Hero } from "@/components/Hero";
 import { Loader } from "@/components/Loader";
@@ -26,11 +24,9 @@ export default function Home() {
         <Ticker />
         <Stats />
         <Skills />
-        <Edge />
-        <About />
         <Experience />
-        <Cases />
         <Projects />
+        <Cases />
         <AIWorkflow />
         <Contact />
       </main>

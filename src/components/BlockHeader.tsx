@@ -15,13 +15,10 @@ function fakeRef(seed: number) {
 // Each section reads like an event from a different system I've built.
 const events: Record<number, { system: string; event: string; ref: string }> = {
   1: { system: "BUILD", event: "passing", ref: "RUN" },
-  2: { system: "HIRING", event: "match found", ref: "REQ" },
-  3: { system: "KYC", event: "identity verified", ref: "KYC" },
-  4: { system: "LEDGER", event: "14 yrs settled", ref: "LDG" },
-  5: { system: "INCIDENT", event: "resolved", ref: "INC" },
-  6: { system: "PAYMENT", event: "captured", ref: "TXN" },
-  7: { system: "AGENT", event: "reviewed by human", ref: "PR" },
-  8: { system: "DEPLOY", event: "ready", ref: "REL" },
+  2: { system: "LEDGER", event: "14 yrs settled", ref: "LDG" },
+  3: { system: "INCIDENT", event: "resolved", ref: "INC" },
+  4: { system: "AGENT", event: "reviewed by human", ref: "PR" },
+  5: { system: "DEPLOY", event: "ready", ref: "REL" },
 };
 
 export function BlockHeader({ block, title, kicker }: { block: number; title: React.ReactNode; kicker: string }) {

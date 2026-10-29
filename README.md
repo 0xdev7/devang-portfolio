@@ -12,19 +12,16 @@
 
 | Section | What it shows |
 |---|---|
-| **Why me** | Six strengths matched to current hiring demand: AI-native engineering, payments & KYC, full-stack + DevOps, security, performance, leadership |
-| **About** | Full-stack story (PHP → AngularJS → React → Next.js) and 12 animated domain cards: digital banking, e-KYC, payment gateways, wallets, money transfer, exchanges, Web3, trading, travel, e-commerce, MLM, APIs & DevOps |
-| **Experience** | Bankai Infotech (Team Lead and Principal Consultant), Joshi Biztech, Cantech — 2012 to now |
+| **Skills** | 12 groups shown at once, core areas first: Front-End, Back-End, Databases, DevOps & Cloud, Security, Payments, KYC and more |
+| **Experience** | Bankai Infotech (Team Lead and Principal Consultant), Joshi Biztech, Cantech — 2012 to now, followed by 18 projects filterable by Fintech, KYC & Payments, Web3, Trading, Full-stack, Libraries and AI-built |
 | **Cases** | Hard problems told as problem → solution → result, plus a recruiter FAQ |
-| **Projects** | 18 projects, filterable by Fintech, KYC & Payments, Web3, Trading, Full-stack, Libraries and AI-built |
-| **Skills** | 12 groups, including KYC & Identity, Payments, Optimisation, Custom Libraries and DevOps & Cloud |
 | **AI** | How I ship with Claude Code: spec → plan → implement → review |
 
 ## Highlights
 
 - **Digital banking & e-KYC:** City Bank (Bangladesh) account opening with NID OCR and video liveness; NassWallet config-driven wallet platform with 35+ services
 - **Payments:** 15+ gateways (Stripe, PayPal, Paystack, CCAvenue, PayU…), bank IMPS APIs, Fireblocks, Safe, BitGo
-- **Web3 & DeFi:** Zeebu Web2 → Web3 migration, money-market and protocol contract integrations, intent fillers / resolvers / solvers, AI-built delta-neutral hedging engine
+- **Web3 & DeFi:** Zeebu Web2 → Web3 migration, money-market and protocol contract integrations, intent-based settlement (UniswapX, 1inch Fusion, CoW, OKX DEX), smart-contract integration across 5+ dApps, AI-built delta-neutral hedging engine
 - **Security:** ECC / AES / RSA encrypted APIs, replay and MITM protection, 20+ audit findings fixed
 - **Libraries implemented and tested:** in-house ECC encryption npm package, 35-control form engine, React component kits
 - **DevOps:** Docker, GitHub Actions CI/CD, Azure Web Apps and Container Apps
@@ -49,8 +46,8 @@ All text lives in `src/data/profile.ts`: profile, stats, experience, case studie
 
 ```
 src/app/                             layout, page, manifest (PWA), global theme
-src/components/                      Nav, Hero (+ 3D HeroScene), Stats, Edge, About,
-                                     Experience, Cases, Projects, Skills, AIWorkflow, Contact, PWA
+src/components/                      Nav, Hero (+ 3D HeroScene), Stats, Skills,
+                                     Experience, Projects, Cases, AIWorkflow, Contact, PWA
 src/components/visuals/Visuals.tsx   animated SVG graphics per project domain
 public/sw.js                         service worker (offline + install)
 ```

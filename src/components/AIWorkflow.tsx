@@ -122,7 +122,7 @@ export function AIWorkflow() {
   return (
     <section id="ai" className="relative mx-auto max-w-6xl scroll-mt-24 px-5 py-16 md:py-24">
       <BlockHeader
-        block={7}
+        block={4}
         kicker="// agents.config"
         title={
           <>

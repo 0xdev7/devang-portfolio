@@ -4,7 +4,6 @@ import { AnimatePresence, motion } from "framer-motion";
 import { X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { projects, type Project } from "@/data/profile";
-import { BlockHeader } from "./BlockHeader";
 import { ProjectVisual } from "./visuals/Visuals";
 
 const filters = ["All", "Fintech", "KYC & Payments", "Web3", "Trading", "Full-stack", "Libraries", "AI-built"] as const;
@@ -124,16 +123,19 @@ export function Projects() {
   const MOBILE_LIMIT = 6;
 
   return (
-    <section id="projects" className="relative mx-auto max-w-6xl scroll-mt-24 px-5 py-16 md:py-24">
-      <BlockHeader
-        block={6}
-        kicker="// projects.shipped"
-        title={
-          <>
-            {projects.length} builds, 2012 → 2026, <span className="text-gradient">banking to blockchain.</span>
-          </>
-        }
-      />
+    // Part of the Experience block: the work behind the four roles above.
+    <section id="projects" className="relative mx-auto max-w-6xl scroll-mt-24 px-5 pb-16 md:pb-24">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-80px" }}
+        className="mb-8 border-t border-line pt-10"
+      >
+        <p className="mb-2 font-mono text-sm text-violet">{"// experience.projects"}</p>
+        <h3 className="text-2xl font-bold tracking-tight sm:text-3xl">
+          {projects.length} builds, 2012 → 2026, <span className="text-gradient">banking to blockchain.</span>
+        </h3>
+      </motion.div>
 
       <div className="-mx-5 mb-8 flex gap-2 overflow-x-auto px-5 pb-1 [scrollbar-width:none] sm:mx-0 sm:flex-wrap sm:px-0">
         {filters.map((f) => (
