@@ -77,69 +77,6 @@ export const tickerItems = [
   "Claude Code",
 ];
 
-// Every domain I've shipped in, each with its own animated graphic.
-export const domainShowcase: { title: string; text: string; visual: VisualKind }[] = [
-  { title: "Digital Banking", text: "Account opening, agency banking — City Bank, CRDB, 9PSB", visual: "banking" },
-  { title: "e-KYC & Identity", text: "Sumsub, Jumio, Aadhaar, NID OCR, video liveness", visual: "kyc" },
-  { title: "Payment Gateways", text: "Stripe, PayPal, PayU, CCAvenue, Paystack — 15+", visual: "payment" },
-  { title: "E-Wallets", text: "NassWallet, QCell, Rupio — 35+ services per role", visual: "wallet" },
-  { title: "Money Transfer", text: "DMT / IMPS, AEPS, remittance via bank APIs", visual: "remittance" },
-  { title: "Crypto Exchanges", text: "Ohocash, Paro, white-label for 8+ brands", visual: "exchange" },
-  { title: "Web3 & DeFi", text: "Staking, money market, Safe multisig, vaults", visual: "intent" },
-  { title: "Trading & Hedging", text: "Intent-based settlement integrations, hedging dashboards (AI-assisted)", visual: "hedge" },
-  { title: "Travel Booking", text: "Flights with TBO API, caching, ticketing", visual: "travel" },
-  { title: "E-commerce", text: "OpenCart stores, grocery marketplace", visual: "ecommerce" },
-  { title: "MLM Platforms", text: "Genealogy trees, level commissions, e-wallet", visual: "mlm" },
-  { title: "APIs & DevOps", text: "Node / PHP / .NET APIs, Docker, Azure CI/CD", visual: "devops" },
-];
-
-export const about = {
-  summary:
-    "Front-End Team Lead who also works full-stack. I started in PHP (CodeIgniter, OpenCart), grew through AngularJS and React, and today build with Next.js, Node.js and TypeScript on MSSQL, MySQL, MongoDB and PostgreSQL. My strongest areas are payments and KYC integrations, API security, performance tuning and implementing reusable component libraries — and I lead the team that ships them.",
-  highlights: [
-    "Lead a team of 6 engineers — people manager since 2022: sprint planning, code review, hiring, mentoring, releases",
-    "25+ fintech products: exchanges, wallets, money transfer, digital banking, DeFi",
-    "Smart-contract integration across 5+ dApps: staking, money market, ERC-4626 savings vaults, Safe multisig",
-    "15+ payment gateways and 5+ KYC providers integrated end to end",
-    "20+ security audit findings fixed · ECC / AES / RSA encrypted APIs",
-    "Implemented and tested shared libraries across portals: ECC encryption npm package, 35-control form engine, React component kit",
-  ],
-  domains: [
-    "Fintech",
-    "Digital Banking",
-    "e-KYC & Onboarding",
-    "Payments",
-    "Crypto Exchanges",
-    "Wallets",
-    "Money Transfer",
-    "DeFi & Treasury",
-    "Trading Ops",
-    "Travel",
-    "MLM",
-  ],
-  fullStack: {
-    title: "Front-end lead by title. Full-stack by habit.",
-    story: [
-      "I lead front-end teams, but I've never stopped at the API boundary. When a screen needs a new endpoint, a faster query or a background job, I build it myself instead of filing a ticket and waiting.",
-      "My career is full-stack from the start: PHP + MySQL exchanges, a Node.js CAB API on MSSQL, OpenCart ↔ Node.js flight booking, MongoDB lead systems, and today Next.js + tRPC + PostgreSQL. It makes me a better lead — I can review a PR end to end and unblock whoever is stuck, front or back.",
-    ],
-    stacks: ["MERN", "Next.js full-stack", "Node + Postgres", "PHP + MySQL", "Node + MSSQL"],
-    layers: [
-      { name: "UI", tech: "React · Next.js · TypeScript · Tailwind · AngularJS" },
-      { name: "API", tech: "Node.js · Express · tRPC · REST · GraphQL · PHP" },
-      { name: "Realtime", tech: "WebSockets · Socket.io · SignalR · cron jobs" },
-      { name: "Data", tech: "PostgreSQL · MongoDB · MySQL · MSSQL · Redis" },
-      { name: "Ship", tech: "Docker · GitHub Actions CI/CD · Azure Web Apps · Container Apps" },
-    ],
-  },
-  education: [
-    "MCA — Indira Gandhi National Open University (IGNOU)",
-    "BCA — SVCCS, Bhavnagar",
-  ],
-  certification: "The Graph Academy — GraphQL & Subgraphs (2023) · TestDome React (2023)",
-  languages: ["English", "Hindi", "Gujarati"],
-};
-
 export type Job = {
   role: string;
   focus: string;
@@ -660,66 +597,11 @@ export const aiWorkflow = {
   ],
 };
 
-// Strengths mapped to where hiring demand is heading (2026+).
-export const edge = [
-  {
-    icon: "bot",
-    title: "AI-native engineering",
-    visual: "devops" as VisualKind,
-    signal: "Teams now hire engineers who ship faster with AI — without lowering the bar.",
-    proof: "Daily Claude Code workflow: 2,000+ AI-assisted commits, 10 custom subagents; AI-written Rust services I specified, reviewed and tested (1,900+ tests).",
-    tags: ["Claude Code", "Agentic workflows", "AI code review"],
-  },
-  {
-    icon: "coins",
-    title: "Payments, KYC & digital banking",
-    visual: "payment" as VisualKind,
-    signal: "Digital banking, stablecoins and cross-border payments keep growing — real integration experience is rare.",
-    proof: "15+ payment gateways, 5+ KYC providers (Sumsub, Jumio, Aadhaar, NID OCR + liveness), bank IMPS APIs, Fireblocks and Safe — for banks in 6+ countries.",
-    tags: ["Payments", "e-KYC", "Banking APIs", "Web3"],
-  },
-  {
-    icon: "layers",
-    title: "Full-stack TypeScript, MERN & DevOps",
-    visual: "api" as VisualKind,
-    signal: "Leaner teams want leads who own a feature from UI to database.",
-    proof: "Next.js + React on top, Node.js / Express / tRPC in the middle, PostgreSQL, MongoDB, MySQL, MSSQL and Redis underneath — and I ship it myself with Docker, GitHub Actions CI/CD, Azure Web Apps and Container Apps.",
-    tags: ["Next.js", "Node.js", "MERN", "Docker", "Azure"],
-  },
-  {
-    icon: "shield",
-    title: "Security-first front-ends",
-    visual: "kyc" as VisualKind,
-    signal: "Regulated money products face audits and real attacks — security can't be an afterthought.",
-    proof: "ECC / AES / RSA encrypted APIs, replay and MITM protection, throttling, CSP, in-house ECC npm library implemented — 20+ audit findings fixed.",
-    tags: ["Encryption", "Audits", "Replay protection"],
-  },
-  {
-    icon: "activity",
-    title: "Performance & reusable libraries",
-    visual: "dashboard" as VisualKind,
-    signal: "Fast apps on slow networks and design systems that scale teams are what product companies pay for.",
-    proof: "Webpack tuning, code splitting, virtualised tables, Multicall batching (138k → 49k RPC calls/day), WebAssembly; implemented shared form engine and component kits across 8+ brands.",
-    tags: ["Core Web Vitals", "Design systems", "WASM"],
-  },
-  {
-    icon: "users",
-    title: "Team leadership",
-    visual: "mlm" as VisualKind,
-    signal: "Senior engineers who can lead, mentor and release reliably are the hardest hires.",
-    proof: "Lead a team of 6 engineers; people manager since 2022 — sprint planning, code standards, reviews, hiring, mentoring, client calls and 100+ releases. Person of the Year 2018/19.",
-    tags: ["Lead", "Mentoring", "Release"],
-  },
-];
-
 export const sections = [
   { id: "home", label: "Home", block: 0 },
   { id: "skills", label: "Skills", block: 1 },
-  { id: "edge", label: "Why me", block: 2 },
-  { id: "about", label: "About", block: 3 },
-  { id: "experience", label: "Experience", block: 4 },
-  { id: "cases", label: "Cases", block: 5 },
-  { id: "projects", label: "Projects", block: 6 },
-  { id: "ai", label: "AI", block: 7 },
-  { id: "contact", label: "Contact", block: 8 },
+  { id: "experience", label: "Experience", block: 2 },
+  { id: "cases", label: "Cases", block: 3 },
+  { id: "ai", label: "AI", block: 4 },
+  { id: "contact", label: "Contact", block: 5 },
 ] as const;

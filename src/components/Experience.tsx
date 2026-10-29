@@ -11,9 +11,9 @@ export function Experience() {
   const height = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
 
   return (
-    <section id="experience" className="relative mx-auto max-w-6xl scroll-mt-24 px-5 py-16 md:py-24">
+    <section id="experience" className="relative mx-auto max-w-6xl scroll-mt-24 px-5 pt-16 pb-12 md:pt-24 md:pb-16">
       <BlockHeader
-        block={4}
+        block={2}
         kicker="// experience.log"
         title={
           <>

@@ -155,8 +155,8 @@ export function Hero() {
             >
               Explore my work
             </a>
-            <a href="#about" className="rounded-xl border border-line px-5 py-3 text-center font-semibold transition hover:border-cyan hover:text-cyan">
-              About me
+            <a href="#experience" className="rounded-xl border border-line px-5 py-3 text-center font-semibold transition hover:border-cyan hover:text-cyan">
+              My experience
             </a>
           </motion.div>
 
