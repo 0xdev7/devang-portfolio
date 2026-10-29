@@ -86,7 +86,7 @@ export const domainShowcase: { title: string; text: string; visual: VisualKind }
   { title: "Money Transfer", text: "DMT / IMPS, AEPS, remittance via bank APIs", visual: "remittance" },
   { title: "Crypto Exchanges", text: "Ohocash, Paro, white-label for 8+ brands", visual: "exchange" },
   { title: "Web3 & DeFi", text: "Staking, money market, Safe multisig, vaults", visual: "intent" },
-  { title: "Trading & Hedging", text: "Filler & solver integrations, hedging dashboards (AI-assisted)", visual: "hedge" },
+  { title: "Trading & Hedging", text: "Intent-based settlement integrations, hedging dashboards (AI-assisted)", visual: "hedge" },
   { title: "Travel Booking", text: "Flights with TBO API, caching, ticketing", visual: "travel" },
   { title: "E-commerce", text: "OpenCart stores, grocery marketplace", visual: "ecommerce" },
   { title: "MLM Platforms", text: "Genealogy trees, level commissions, e-wallet", visual: "mlm" },
@@ -98,7 +98,8 @@ export const about = {
     "Front-End Team Lead who also works full-stack. I started in PHP (CodeIgniter, OpenCart), grew through AngularJS and React, and today build with Next.js, Node.js and TypeScript on MSSQL, MySQL, MongoDB and PostgreSQL. My strongest areas are payments and KYC integrations, API security, performance tuning and implementing reusable component libraries — and I lead the team that ships them.",
   highlights: [
     "Lead a team of 6 engineers — people manager since 2022: sprint planning, code review, hiring, mentoring, releases",
-    "50+ fintech products: exchanges, wallets, money transfer, digital banking, DeFi",
+    "25+ fintech products: exchanges, wallets, money transfer, digital banking, DeFi",
+    "Smart-contract integration across 5+ dApps: staking, money market, ERC-4626 savings vaults, Safe multisig",
     "15+ payment gateways and 5+ KYC providers integrated end to end",
     "20+ security audit findings fixed · ECC / AES / RSA encrypted APIs",
     "Implemented and tested shared libraries across portals: ECC encryption npm package, 35-control form engine, React component kit",
@@ -162,7 +163,7 @@ export const experience: Job[] = [
       "Lead a 6-engineer front-end team for Zeebu (telecom settlement & loyalty) and an intent-based DeFi protocol — architecture, sprint planning, code review, hiring, mentoring and 100+ production releases.",
       "Moved Zeebu from Web2 to Web3 in three steps — MetaMask + ethers.js → wagmi with a custom wallet connector → Reown AppKit — with staking, withdraw, bonus, referral commission and wallet-signature registration.",
       "Integrated money-market (Aave-style) and protocol contracts — supply / borrow / repay, ERC-4626 savings vaults, Safe multisig flows — with Multicall batching and subgraph data.",
-      "Built intent-settlement infrastructure: a UniswapX filler and 1inch Fusion resolver, OKX and CoW Protocol solvers, keeper and rebalancer bots, a treasury dashboard (980 commits) and a delta-neutral hedging engine for perps and dated futures — the Rust services built with Claude Code (AI), which I specified, reviewed and tested.",
+      "Built intent-based settlement infrastructure integrated with UniswapX, 1inch Fusion, CoW Protocol and OKX DEX, keeper and rebalancer bots, a treasury dashboard (980 commits) and a delta-neutral hedging engine for perps and dated futures — the Rust services built with Claude Code (AI), which I specified, reviewed and tested.",
       "Build and ship every service myself: Docker images to Azure Container Registry, GitHub Actions CI/CD with UAT → prod promotion, deploys to Azure Container Apps and Web Apps; Azure → AWS KMS federation for signing.",
       "Owned security: OAK Security audit remediation, encrypted payloads, nonce / replay and MITM protection, throttling, CSP — 20+ findings fixed.",
     ],
@@ -271,7 +272,7 @@ export const projects: Project[] = [
     stack: ["Next.js 14", "tRPC v11", "Drizzle", "PostgreSQL", "BullMQ (AI-written)", "Redis", "Safe SDK", "AWS KMS", "Docker", "Azure Container Apps", "Claude Code"],
     points: [
       "Lead author (980 commits): 3-of-5 Gnosis Safe across 5 EVM chains with propose → sign → execute flows, delegates, whitelisting and signed-message login.",
-      "Treasury, money-market, settlement-executor, filler, market-maker, hot-wallet and CEX views — PnL, solvency, reconciliation, rebalancing and alerts.",
+      "Treasury, money-market, settlement-executor, intent-execution, market-maker, hot-wallet and CEX views — PnL, solvency, reconciliation, rebalancing and alerts.",
       "3-tier data fallback (Postgres views → admin proxy → live stats) so pages stay up when a source fails; virtualised tables with CSV / XLSX export.",
     ],
   },
@@ -289,19 +290,19 @@ export const projects: Project[] = [
     ],
   },
   {
-    title: "Intent Settlement — Fillers, Resolvers & Solvers",
+    title: "Intent-Based Settlement — UniswapX, 1inch Fusion, CoW & OKX",
     domain: "UniswapX · 1inch Fusion · CoW Protocol · OKX DEX · MEV",
     year: "2026",
     visual: "intent",
     featured: true,
     stack: ["TypeScript", "Node.js", "ethers v6", "PostgreSQL", "AWS KMS", "Docker", "Azure Container Apps", "Claude Code (AI)"],
     points: [
-      "Filler / resolver service (335 commits): inventory-backed UniswapX Dutch-order filler and 1inch Fusion resolver — pre-fill simulation, multi-venue quoting off the OKX book, post-fill hedging, per-venue gas-tier ladders, exclusive-window re-simulate / replace and MEV-aware submit lanes.",
+      "Intent execution service (335 commits): inventory-backed settlement of UniswapX and 1inch Fusion intent orders — pre-trade simulation, multi-venue quoting off the OKX book, post-fill hedging, per-venue gas-tier ladders, exclusive-window re-simulate / replace and MEV-aware submit lanes.",
       "Risk controls: fleet-wide $500k open-volume cap measured off the live OKX book, volatility gate, quote pause across the fleet, per-pair markup and buy / sell switches from a live config console.",
-      "OKX DEX intent solver (137 commits, Rust written with Claude Code): /quote → /solve → /settle with EIP-712 signing and KMS broadcast, OKX spot + perp hedging; Multicall batching cut RPC load ~138k → ~49k calls / day.",
-      "CoW Protocol solver (AI-written Rust, my config and testing): dry-run master switch, Redis-down salvage of financial writes, JIT ERC-1271 settlement from executor inventory.",
+      "OKX DEX intent settlement (137 commits, Rust written with Claude Code): /quote → /solve → /settle with EIP-712 signing and KMS broadcast, OKX spot + perp hedging; Multicall batching cut RPC load ~138k → ~49k calls / day.",
+      "CoW Protocol intent settlement (AI-written Rust, my config and testing): dry-run master switch, Redis-down salvage of financial writes, JIT ERC-1271 settlement from executor inventory.",
       "Each service shipped as a Docker image through GitHub Actions to Azure Container Apps, with per-venue dry-run and UAT / pre-prod / prod pipelines.",
-      "Ops around it: keeper bot with Multicall3 reconcile and per-venue hedge registry, cross-chain inventory rebalancer with Azure → AWS KMS signing, and a solver analytics dashboard with 3-tier fallback.",
+      "Ops around it: keeper bot with Multicall3 reconcile and per-venue hedge registry, cross-chain inventory rebalancer with Azure → AWS KMS signing, and a settlement analytics dashboard with 3-tier fallback.",
     ],
   },
   {
@@ -480,7 +481,7 @@ export const caseStudies = [
       "Pages and services read hundreds of contract values one by one — slow and hitting provider rate limits.",
     solution:
       "Multicall batching, subgraph for history, 3-tier data fallback, Redis caching and virtualised tables.",
-    result: "Solver RPC calls ~138k → ~49k / day; pages stay fast and up when one source fails.",
+    result: "Settlement RPC calls ~138k → ~49k / day; pages stay fast and up when one source fails.",
     market: "Performance",
   },
   {
@@ -582,7 +583,7 @@ export const skills = [
   {
     group: "Web3 & Trading",
     icon: "web3",
-    items: ["wagmi v2", "viem", "ethers", "Reown AppKit", "RainbowKit", "WalletConnect", "Safe SDK", "Solidity", "Foundry", "ERC-20 / 721 / 4626", "EIP-712 / 1271", "The Graph", "DEX / intent API integration"],
+    items: ["wagmi v2", "viem", "ethers", "Reown AppKit", "RainbowKit", "WalletConnect", "Safe SDK", "Smart-contract integration (5+ dApps)", "ERC-20 / 721 / 4626", "EIP-712 / 1271", "The Graph", "DEX / intent API integration"],
   },
   {
     group: "Optimisation",
@@ -612,7 +613,7 @@ export const aiWorkflow = {
   numbers: [
     { value: "2,000+", label: "AI-assisted commits" },
     { value: "150+", label: "Claude Code sessions" },
-    { value: "15+", label: "Repos (trading, treasury, solver)" },
+    { value: "15+", label: "Repos (trading, treasury, settlement)" },
     { value: "10", label: "Custom subagents" },
   ],
   steps: [
